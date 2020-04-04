@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.transportcontrol.model.UserModel;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -96,21 +97,27 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
-                            Log.d(TAG, "WAT");
-                        } else {
-                            Log.d(TAG, "i am working");
-                        }
-                        Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
-                        if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithCredential", task.getException());
                             Toast.makeText(MainActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             Log.d(TAG, "i am working");
                             Toast.makeText(MainActivity.this, "Succes", Toast.LENGTH_SHORT).show();
-                            finish();
+                            regUser();
                         }
                     }
                 });
+    }
+
+    private void regUser() {
+        UserModel userModel = new UserModel();
+        userModel.setuId(mFirebaseAuth.getUid());
+        userModel.setName("Name");
+        userModel.setLastName("last name");
+        userModel.setMiddleName("middle name");
+        userModel.setPhone("88005553535");
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("users");
+        myRef.push().setValue(userModel);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.transportcontrol;
+package com.example.transportcontrol.model;
 
 import java.util.ArrayList;
 
