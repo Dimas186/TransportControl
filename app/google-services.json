@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "755440022897",
+    "firebase_url": "https://transportcontrol-183f1.firebaseio.com",
+    "project_id": "transportcontrol-183f1",
+    "storage_bucket": "transportcontrol-183f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755440022897:android:b86a9b00c896005baef2d0",
+        "android_client_info": {
+          "package_name": "com.example.transportcontrol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755440022897-3i88ptv6gjdnjnp9ia3d5v5fa0bkf952.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcj-VUokWbd0HCJNSG3r6TWBsBDKXMDbg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755440022897-3i88ptv6gjdnjnp9ia3d5v5fa0bkf952.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
