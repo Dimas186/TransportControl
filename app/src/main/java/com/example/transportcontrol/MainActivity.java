@@ -157,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         userModel.setLastName("last name");
         userModel.setMiddleName("middle name");
         userModel.setPhone("88005553535");
+        userModel.setType("undefined");
         myRef.push().setValue(userModel);
     }
 }

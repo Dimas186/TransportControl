@@ -4,6 +4,7 @@ public class UserModel {
 
     String uId;
     String name, lastName, middleName, phone;
+    String type;
 
     public UserModel() {
 
@@ -47,5 +48,13 @@ public class UserModel {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
