@@ -22,8 +22,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -37,11 +43,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     private FirebaseDatabase database;
     private DatabaseReference myRef;
+    private ArrayList<UserModel> users = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("users");
+        setUsers();
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -63,10 +74,32 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
             startActivityForResult(signInIntent, RC_SIGN_IN);
         } else {
-            database = FirebaseDatabase.getInstance();
-            myRef = database.getReference("users");
             Toast.makeText(MainActivity.this, mFirebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void setUsers() {
+        users = new ArrayList();
+
+        Query myQuery = myRef;
+        myQuery.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                users.add(dataSnapshot.getValue(UserModel.class));
+            }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 
     @Override
@@ -101,9 +134,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                             Toast.makeText(MainActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            Log.d(TAG, "i am working");
                             Toast.makeText(MainActivity.this, "Succes", Toast.LENGTH_SHORT).show();
-                            regUser();
+                            boolean userIsRegistered = false;
+                            for (UserModel userModel : users) {
+                                if (userModel.getuId().equals(mFirebaseAuth.getUid())) {
+                                    System.out.println(userModel.getuId());
+                                    userIsRegistered = true;
+                                }
+                            }
+                            if (!userIsRegistered) {
+                                regUser();
+                            }
                         }
                     }
                 });
@@ -116,8 +157,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         userModel.setLastName("last name");
         userModel.setMiddleName("middle name");
         userModel.setPhone("88005553535");
-        database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("users");
         myRef.push().setValue(userModel);
     }
 }
