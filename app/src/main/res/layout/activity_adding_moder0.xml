@@ -83,12 +83,13 @@
                     android:layout_centerInParent="true" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/addDriver"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/drivers"
                     android:layout_marginRight="30dp"
-                    android:text="+" />
+                    android:text="+"
+                    android:onClick="onClick"/>
             </RelativeLayout>
             <EditText
                 android:id="@+id/technicalInspection"
@@ -182,10 +183,12 @@
                 android:layout_marginBottom="10dp"/>
 
             <Button
+                android:id="@+id/btnAdd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/add" />
+                android:text="@string/add"
+                android:onClick="onClick"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
