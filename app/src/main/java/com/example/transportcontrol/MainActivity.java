@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.transportcontrol.model.DataModel;
 import com.example.transportcontrol.model.UserModel;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -43,9 +44,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private FirebaseUser mFirebaseUser;
 
     private FirebaseDatabase database;
-    private DatabaseReference myRef;
+    private DatabaseReference usersRef;
+    private DatabaseReference itemsRef;
     private ArrayList<UserModel> users = new ArrayList<>();
     UserModel myModel;
+    private ArrayList<DataModel> items = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +56,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         setContentView(R.layout.activity_main);
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("users");
+        usersRef = database.getReference("users");
+        itemsRef = database.getReference("items");
         setUsers();
 
         // Configure Google Sign In
@@ -83,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private void setUsers() {
         users = new ArrayList();
 
-        Query myQuery = myRef;
+        Query myQuery = usersRef;
         myQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -107,6 +111,38 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+    }
+
+    private void setData() {
+        items = new ArrayList();
+
+        Query myQuery = itemsRef;
+        myQuery.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                items.add(dataSnapshot.getValue(DataModel.class));
+            }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (AddingActivityModer0.isAdded()) {
+            AddingActivityModer0.setIsAdded(false);
+        }
     }
 
     @Override
@@ -165,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         userModel.setMiddleName("middle name");
         userModel.setPhone("88005553535");
         userModel.setType("undefined");
-        myRef.push().setValue(userModel);
+        usersRef.push().setValue(userModel);
     }
 
     public void onClick(View v) {

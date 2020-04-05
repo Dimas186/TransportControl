@@ -22,6 +22,16 @@ public class AddingActivityModer0 extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference myRef;
 
+    public static boolean isAdded() {
+        return isAdded;
+    }
+
+    public static void setIsAdded(boolean isAdded) {
+        AddingActivityModer0.isAdded = isAdded;
+    }
+
+    private static boolean isAdded = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +50,7 @@ public class AddingActivityModer0 extends AppCompatActivity {
             case R.id.btnAdd:
                 setDataModel();
                 myRef.push().setValue(dataModel);
+                isAdded = true;
                 break;
         }
     }
