@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">TransportControl</string>
+    <string name="motorcade">Автоколонна</string>
+    <string name="vehicleType">Тип ТС</string>
+    <string name="brand">Марка</string>
+    <string name="plateNumber">Гос. Номер</string>
+    <string name="inventoryNumber">Инвентарный №</string>
+    <string name="garageNumber">Гаражный номер</string>
+    <string name="drivers">Закрепленные водители</string>
+    <string name="technicalInspection">Тех. Осмотр</string>
+    <string name="insurance">Страховка</string>
+    <string name="firstAidKit">Аптечка</string>
+    <string name="extinguisher">Огнетушитель</string>
+    <string name="previousTechnicalInspection">Дата проведения Предыдущего ТО</string>
+    <string name="comments">Замечания</string>
+    <string name="coolantDensity">Плотность ОЖ</string>
+    <string name="electricalEquipmentState">Состояние электрооборудования</string>
+    <string name="sufficientPressureInTheFireExtinguisher">Достаточное давление в огнетушителе</string>
+    <string name="electrolyteDensity">Плотность электролита</string>
 </resources>

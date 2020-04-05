@@ -22,7 +22,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_gravity="center_horizontal"
-                android:hint="Motorcade"
+                android:hint="@string/motorcade"
                 android:layout_marginBottom="10dp"/>
             <EditText
                 android:id="@+id/vehicleType"
@@ -31,7 +31,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_gravity="center_horizontal"
-                android:hint="Vehicle type"
+                android:hint="@string/vehicleType"
                 android:layout_marginBottom="10dp"/>
             <EditText
                 android:id="@+id/brand"
@@ -40,7 +40,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_gravity="center_horizontal"
-                android:hint="Name"
+                android:hint="@string/brand"
                 android:layout_marginBottom="10dp"/>
             <EditText
                 android:id="@+id/plateNumber"
@@ -49,7 +49,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_gravity="center_horizontal"
-                android:hint="Name"
+                android:hint="@string/plateNumber"
                 android:layout_marginBottom="10dp"/>
             <EditText
                 android:id="@+id/inventoryNumber"
@@ -58,7 +58,7 @@
                 android:ems="10"
                 android:inputType="number"
                 android:layout_gravity="center_horizontal"
-                android:hint="Name"
+                android:hint="@string/inventoryNumber"
                 android:layout_marginBottom="10dp"/>
             <EditText
                 android:id="@+id/garageNumber"
@@ -67,7 +67,7 @@
                 android:ems="10"
                 android:inputType="number"
                 android:layout_gravity="center_horizontal"
-                android:hint="Name"
+                android:hint="@string/garageNumber"
                 android:layout_marginBottom="10dp"/>
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -80,7 +80,7 @@
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:layout_gravity="center_horizontal"
-                    android:hint="Name"
+                    android:hint="@string/drivers"
                     android:layout_centerInParent="true" />
 
                 <Button
@@ -98,7 +98,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_gravity="center_horizontal"
-                android:hint="Name"
+                android:hint="@string/technicalInspection"
                 android:layout_marginBottom="10dp"/>
             <EditText
                 android:id="@+id/insurance"
@@ -107,7 +107,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_gravity="center_horizontal"
-                android:hint="Name"
+                android:hint="@string/insurance"
                 android:layout_marginBottom="10dp"/>
             <EditText
                 android:id="@+id/firstAidKit"
@@ -116,7 +116,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_gravity="center_horizontal"
-                android:hint="Name"
+                android:hint="@string/firstAidKit"
                 android:layout_marginBottom="10dp"/>
             <EditText
                 android:id="@+id/extinguisher"
@@ -125,7 +125,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_gravity="center_horizontal"
-                android:hint="Name"
+                android:hint="@string/extinguisher"
                 android:layout_marginBottom="10dp"/>
             <EditText
                 android:id="@+id/previousTechnicalInspection"
@@ -134,7 +134,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_gravity="center_horizontal"
-                android:hint="Name"
+                android:hint="@string/previousTechnicalInspection"
                 android:layout_marginBottom="10dp"/>
             <EditText
                 android:id="@+id/comments"
@@ -143,7 +143,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_gravity="center_horizontal"
-                android:hint="Name"
+                android:hint="@string/comments"
                 android:layout_marginBottom="10dp"/>
             <EditText
                 android:id="@+id/coolantDensity"
@@ -152,7 +152,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_gravity="center_horizontal"
-                android:hint="Name"
+                android:hint="@string/coolantDensity"
                 android:layout_marginBottom="10dp"/>
             <EditText
                 android:id="@+id/electricalEquipmentState"
@@ -161,7 +161,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_gravity="center_horizontal"
-                android:hint="Name"
+                android:hint="@string/electricalEquipmentState"
                 android:layout_marginBottom="10dp"/>
             <EditText
                 android:id="@+id/sufficientPressureInTheFireExtinguisher"
@@ -170,7 +170,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_gravity="center_horizontal"
-                android:hint="Name"
+                android:hint="@string/sufficientPressureInTheFireExtinguisher"
                 android:layout_marginBottom="10dp"/>
             <EditText
                 android:id="@+id/electrolyteDensity"
@@ -179,7 +179,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_gravity="center_horizontal"
-                android:hint="Name"
+                android:hint="@string/electrolyteDensity"
                 android:layout_marginBottom="10dp"/>
         </LinearLayout>
     </ScrollView>
