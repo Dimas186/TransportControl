@@ -163,6 +163,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     public void onClick(View v) {
-        startActivity(new Intent(this, AddingActivityModer0.class));
+        startActivity(new Intent(this, AddingActivityModer12.class));
     }
 }

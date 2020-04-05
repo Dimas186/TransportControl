@@ -17,4 +17,6 @@
     <string name="electricalEquipmentState">Состояние электрооборудования</string>
     <string name="sufficientPressureInTheFireExtinguisher">Достаточное давление в огнетушителе</string>
     <string name="electrolyteDensity">Плотность электролита</string>
+    <string name="eliminationDate">Дата устранения</string>
+    <string name="wheelNumbers">Номера колес</string>
 </resources>
