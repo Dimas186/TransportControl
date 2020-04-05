@@ -19,4 +19,5 @@
     <string name="electrolyteDensity">Плотность электролита</string>
     <string name="eliminationDate">Дата устранения</string>
     <string name="wheelNumbers">Номера колес</string>
+    <string name="add">Добавить</string>
 </resources>
