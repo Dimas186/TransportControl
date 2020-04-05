@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private ArrayList<UserModel> users = new ArrayList<>();
+    UserModel myModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +87,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         myQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                users.add(dataSnapshot.getValue(UserModel.class));
+                UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                if (userModel.getuId().equals(mFirebaseUser.getUid())) {
+                    myModel = userModel;
+                    System.out.println(myModel.getType());
+                }
+                users.add(userModel);
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
@@ -163,6 +169,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     public void onClick(View v) {
-        startActivity(new Intent(this, AddingActivityModer3.class));
+        if (myModel.getType().equals("moder0")) {
+            startActivity(new Intent(this, AddingActivityModer0.class));
+        }
+        if (myModel.getType().equals("moder1")) {
+            startActivity(new Intent(this, AddingActivityModer12.class));
+        }
+        if (myModel.getType().equals("moder2")) {
+            startActivity(new Intent(this, AddingActivityModer12.class));
+        }
+        if (myModel.getType().equals("moder3")) {
+            startActivity(new Intent(this, AddingActivityModer3.class));
+        }
     }
 }
