@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.transportcontrol.model.UserModel;
@@ -159,5 +160,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         userModel.setPhone("88005553535");
         userModel.setType("undefined");
         myRef.push().setValue(userModel);
+    }
+
+    public void onClick(View v) {
+        startActivity(new Intent(this, AddingActivityModer0123.class));
     }
 }

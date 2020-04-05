@@ -15,6 +15,7 @@
         android:layout_marginBottom="100dp"
         android:clickable="true"
         app:backgroundTint="@android:color/white"
-        app:srcCompat="@drawable/add" />
+        app:srcCompat="@drawable/add"
+        android:onClick="onClick"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
