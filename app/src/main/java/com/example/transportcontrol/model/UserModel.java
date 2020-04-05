@@ -4,7 +4,7 @@ public class UserModel {
 
     String uId;
     String name, lastName, middleName, phone;
-    String type;
+    String type; //moder0, moder1, moder2, moder3, user
 
     public UserModel() {
 
