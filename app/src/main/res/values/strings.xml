@@ -22,4 +22,8 @@
     <string name="add">Добавить</string>
     <string name="scan">scan</string>
     <string name="addPhoto">Добавить фото</string>
+    <string name="name">Имя</string>
+    <string name="etLastName">Фамилия</string>
+    <string name="etMiddleName">Отчество</string>
+    <string name="phone">Телефон</string>
 </resources>

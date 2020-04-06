@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.transportcontrol.model.DataModel;
@@ -60,12 +61,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private RVAdapter mAdapter;
     private RecyclerTouchListener onTouchListener;
     private ArrayList<DataModel> items = new ArrayList<>();
+    PrefManager prefManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        prefManager = new PrefManager(this);
         database = FirebaseDatabase.getInstance();
         usersRef = database.getReference("users");
         itemsRef = database.getReference("items");
@@ -93,7 +96,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
             startActivityForResult(signInIntent, RC_SIGN_IN);
         } else {
-            Toast.makeText(MainActivity.this, mFirebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
+            if (prefManager.isUserRegistered()) {
+                Toast.makeText(MainActivity.this, mFirebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
+            }
+            else {
+                regUser();
+            }
         }
     }
 
@@ -180,9 +188,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                if (userModel.getuId().equals(mFirebaseUser.getUid())) {
-                    myModel = userModel;
-                    System.out.println(myModel.getType());
+                if (mFirebaseUser != null) {
+                    if (userModel.getuId().equals(mFirebaseUser.getUid())) {
+                        myModel = userModel;
+                        System.out.println(myModel.getType());
+                    }
                 }
                 users.add(userModel);
             }
@@ -288,20 +298,50 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                             if (!userIsRegistered) {
                                 regUser();
                             }
+                            else {
+                                prefManager.setUserRegistered(true);
+                            }
+                            mFirebaseUser = mFirebaseAuth.getCurrentUser();
+                            setUsers();
                         }
                     }
                 });
     }
 
     private void regUser() {
-        UserModel userModel = new UserModel();
-        userModel.setuId(mFirebaseAuth.getUid());
-        userModel.setName("Name");
-        userModel.setLastName("last name");
-        userModel.setMiddleName("middle name");
-        userModel.setPhone("88005553535");
-        userModel.setType("undefined");
-        usersRef.push().setValue(userModel);
+        final View view = getLayoutInflater().inflate(R.layout.edit_text_dialog, null);
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Регистрация");
+        alertDialog.setCancelable(false);
+        final EditText etLastName = view.findViewById(R.id.etLastName);
+        final EditText etName = view.findViewById(R.id.etName);
+        final EditText etMiddleName = view.findViewById(R.id.etMiddleName);
+        final EditText etPhone = view.findViewById(R.id.etPhone);
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Зарегистрироваться", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                prefManager.setUserRegistered(true);//if you put it at the end, it doesn't have time to complete
+                UserModel userModel = new UserModel();
+                userModel.setuId(mFirebaseAuth.getUid());
+                userModel.setName(etName.getText().toString());
+                userModel.setLastName(etLastName.getText().toString());
+                userModel.setMiddleName(etMiddleName.getText().toString());
+                userModel.setPhone(etPhone.getText().toString());
+                userModel.setType("undefined");
+                usersRef.push().setValue(userModel);
+            }
+        });
+
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Отмена", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        alertDialog.setView(view);
+        alertDialog.show();
     }
 
     public void onClick(View v) {
