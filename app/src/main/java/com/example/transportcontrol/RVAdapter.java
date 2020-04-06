@@ -53,8 +53,6 @@ public  class RVAdapter extends RecyclerView.Adapter<RVAdapter.MainViewHolder> {
         public MainViewHolder(View itemView) {
             super(itemView);
             mainText = itemView.findViewById(R.id.name);
-            subText =  itemView.findViewById(R.id.description);
-            costText =  itemView.findViewById(R.id.price);
         }
 
         public void bindData(DataModel expensesList) {
