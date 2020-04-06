@@ -68,7 +68,7 @@ public  class RVAdapter extends RecyclerView.Adapter<RVAdapter.MainViewHolder> {
                     .asBitmap()  //Tells glide that it is a bitmap
                     .load(dataModel.getPhoto())
                     .apply(new RequestOptions()
-                            .override(375, 250)
+                            .override(400, 250)
                             .centerCrop()
                             .placeholder(R.drawable.progress_animation))
                     .into(ivPhoto);

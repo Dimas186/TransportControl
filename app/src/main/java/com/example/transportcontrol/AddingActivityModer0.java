@@ -233,7 +233,7 @@ public class AddingActivityModer0 extends AppCompatActivity {
                             .asBitmap()  //Tells glide that it is a bitmap
                             .load(downloadUri)
                             .apply(new RequestOptions()
-                                    .override(375, 250)
+                                    .override(900, 600)
                                     .centerCrop()
                                     .placeholder(R.drawable.progress_animation))
                             .into(ivPhoto);
