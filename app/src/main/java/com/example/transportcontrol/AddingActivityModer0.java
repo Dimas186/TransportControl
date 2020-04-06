@@ -227,6 +227,7 @@ public class AddingActivityModer0 extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
                     System.out.println(downloadUri);
+                    dataModel.setPhoto(downloadUri.toString());
                     ivPhoto.setVisibility(View.VISIBLE);
                     Glide.with(AddingActivityModer0.this) //Takes the context
                             .asBitmap()  //Tells glide that it is a bitmap
@@ -235,7 +236,7 @@ public class AddingActivityModer0 extends AppCompatActivity {
                                     .override(375, 250)
                                     .centerCrop()
                                     .placeholder(R.drawable.progress_animation))
-                            .into(ivPhoto);   //into the imageview
+                            .into(ivPhoto);
                 } else {
                     // Handle failures
                     // ...

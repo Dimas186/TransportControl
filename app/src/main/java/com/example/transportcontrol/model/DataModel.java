@@ -12,6 +12,7 @@ public class DataModel {
     private ArrayList<String> wheelNumbers;
     private String comments, eliminationDate, coolantDensity, electricalEquipmentState;
     private String sufficientPressureInTheFireExtinguisher, electrolyteDensity, offers;
+    private String photo;
 
     public DataModel() {
 
@@ -23,6 +24,14 @@ public class DataModel {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public String getMotorcade() {

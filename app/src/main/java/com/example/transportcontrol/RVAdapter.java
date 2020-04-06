@@ -4,10 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.transportcontrol.model.DataModel;
 
 import java.util.ArrayList;
@@ -16,8 +19,10 @@ import java.util.List;
 public  class RVAdapter extends RecyclerView.Adapter<RVAdapter.MainViewHolder> {
     LayoutInflater inflater;
     List<DataModel> modelList;
+    Context mContext;
 
     public RVAdapter(Context context, List<DataModel> list) {
+        mContext = context;
         inflater = LayoutInflater.from(context);
         modelList = new ArrayList<>(list);
     }
@@ -48,17 +53,25 @@ public  class RVAdapter extends RecyclerView.Adapter<RVAdapter.MainViewHolder> {
 
     class MainViewHolder extends RecyclerView.ViewHolder {
 
-        TextView mainText, subText, costText;
+        TextView mainText;
+        ImageView ivPhoto;
 
         public MainViewHolder(View itemView) {
             super(itemView);
             mainText = itemView.findViewById(R.id.name);
+            ivPhoto = itemView.findViewById(R.id.ivPhoto);
         }
 
-        public void bindData(DataModel expensesList) {
-            mainText.setText(expensesList.getBrand());
-            //subText.setText(expensesList.getCategory());
-            //costText.setText(expensesList.getCost() + "р.");
+        public void bindData(DataModel dataModel) {
+            mainText.setText(dataModel.getBrand());
+            Glide.with(mContext) //Takes the context
+                    .asBitmap()  //Tells glide that it is a bitmap
+                    .load(dataModel.getPhoto())
+                    .apply(new RequestOptions()
+                            .override(375, 250)
+                            .centerCrop()
+                            .placeholder(R.drawable.progress_animation))
+                    .into(ivPhoto);
         }
     }
 }

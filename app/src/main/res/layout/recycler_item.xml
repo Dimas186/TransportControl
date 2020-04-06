@@ -114,7 +114,7 @@
             android:orientation="vertical"
             android:padding="@dimen/padd_10">
             <ImageView
-                android:id="@+id/video_preview_pl"
+                android:id="@+id/ivPhoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -126,7 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/video_preview_pl"
+                android:layout_toRightOf="@+id/ivPhoto"
                 android:textSize="14sp" />
         </RelativeLayout>
     </LinearLayout>
