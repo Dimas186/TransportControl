@@ -99,6 +99,8 @@ public class AddingActivityModer12 extends AppCompatActivity {
             case R.id.btnAdd:
                 setDataModel();
                 myRef.push().setValue(dataModel);
+                isAdded = true;
+                finish();
                 break;
         }
     }

@@ -67,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         usersRef = database.getReference("users");
         itemsRef = database.getReference("items");
         setUsers();
+        initRV();
+        setData();
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -88,8 +90,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
             startActivityForResult(signInIntent, RC_SIGN_IN);
         } else {
-            initRV();
-            setData();
             Toast.makeText(MainActivity.this, mFirebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
         }
     }
@@ -202,7 +202,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     protected void onResume() {
         super.onResume();
         if (AddingActivityModer0.isAdded()) {
+            setData();
             AddingActivityModer0.setIsAdded(false);
+        }
+        if (AddingActivityModer12.isAdded()) {
+            setData();
+            AddingActivityModer12.setIsAdded(false);
+        }
+        if (AddingActivityModer3.isAdded()) {
+            setData();
+            AddingActivityModer3.setIsAdded(false);
         }
     }
 

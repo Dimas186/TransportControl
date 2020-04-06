@@ -96,6 +96,7 @@ public class AddingActivityModer0 extends AppCompatActivity {
                 setDataModel();
                 myRef.push().setValue(dataModel);
                 isAdded = true;
+                finish();
                 break;
         }
     }
