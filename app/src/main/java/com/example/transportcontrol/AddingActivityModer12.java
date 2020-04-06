@@ -80,12 +80,14 @@ public class AddingActivityModer12 extends AppCompatActivity {
         switch (v.getId()) {
             case R.id.addDriver:
                 driversList.add(drivers.getText().toString());
+                drivers.setText("");
                 break;
             case R.id.scan:
                 showImageImportDialog();
                 break;
             case R.id.addWheelNumbers:
                 wheelNumbersList.add(wheelNumbers.getText().toString());
+                wheelNumbers.setText("");
                 break;
             case R.id.addPhoto:
                 Intent intent = new Intent(this, ImageSelectActivity.class);
