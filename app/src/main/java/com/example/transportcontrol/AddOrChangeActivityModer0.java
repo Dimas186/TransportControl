@@ -42,28 +42,38 @@ import java.util.Locale;
 
 import in.mayanknagwanshi.imagepicker.ImageSelectActivity;
 
-public class AddingActivityModer0 extends AppCompatActivity {
+public class AddOrChangeActivityModer0 extends AppCompatActivity {
 
     EditText motorcade, vehicleType, brand, plateNumber, inventoryNumber, garageNumber, drivers, technicalInspection;
     EditText insurance, firstAidKit, extinguisher, previousTechnicalInspection, comments, coolantDensity;
     EditText electricalEquipmentState, sufficientPressureInTheFireExtinguisher, electrolyteDensity;
     ImageView ivPhoto;
-    DataModel dataModel = new DataModel();
+    static DataModel dataModel = new DataModel();
     ArrayList<String> driversList = new ArrayList<>();
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private StorageReference mStorageRef;
     ProgressDialog progressDialog;
 
-    public static boolean isAdded() {
-        return isAdded;
+    public static boolean isAddedOrChanged() {
+        return isAddedOrChanged;
     }
 
-    public static void setIsAdded(boolean isAdded) {
-        AddingActivityModer0.isAdded = isAdded;
+    public static void setIsAddedOrChanged(boolean isAdded) {
+        AddOrChangeActivityModer0.isAddedOrChanged = isAdded;
     }
 
-    private static boolean isAdded = false;
+    private static boolean isAddedOrChanged = false;
+
+    public static void setForChanges(boolean forChanges) {
+        AddOrChangeActivityModer0.forChanges = forChanges;
+    }
+
+    private static boolean forChanges = false;
+
+    public static void setDataModel(DataModel dataModel) {
+        AddOrChangeActivityModer0.dataModel = dataModel;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,10 +102,14 @@ public class AddingActivityModer0 extends AppCompatActivity {
                 intent.putExtra(ImageSelectActivity.FLAG_GALLERY, true);//default is true
                 startActivityForResult(intent, 9917);
                 break;
-            case R.id.btnAdd:
+            case R.id.btnAddOrChange:
                 setDataModel();
-                myRef.push().setValue(dataModel);
-                isAdded = true;
+                if (forChanges) {
+                    myRef.child(dataModel.getId()).setValue(dataModel);
+                } else {
+                    myRef.push().setValue(dataModel);
+                }
+                isAddedOrChanged = true;
                 finish();
                 break;
         }
@@ -132,23 +146,40 @@ public class AddingActivityModer0 extends AppCompatActivity {
     }
 
     private void setDataModel() {
-        dataModel.setMotorcade(motorcade.getText().toString());
-        dataModel.setVehicleType(vehicleType.getText().toString());
-        dataModel.setBrand(brand.getText().toString());
-        dataModel.setPlateNumber(plateNumber.getText().toString());
-        dataModel.setInventoryNumber(inventoryNumber.getText().toString());
-        dataModel.setGarageNumber(garageNumber.getText().toString());
-        dataModel.setDrivers(driversList);
-        dataModel.setTechnicalInspection(technicalInspection.getText().toString());
-        dataModel.setInsurance(insurance.getText().toString());
-        dataModel.setFirstAidKit(firstAidKit.getText().toString());
-        dataModel.setExtinguisher(extinguisher.getText().toString());
-        dataModel.setPreviousTechnicalInspection(previousTechnicalInspection.getText().toString());
-        dataModel.setComments(comments.getText().toString());
-        dataModel.setCoolantDensity(coolantDensity.getText().toString());
-        dataModel.setElectricalEquipmentState(electricalEquipmentState.getText().toString());
-        dataModel.setSufficientPressureInTheFireExtinguisher(sufficientPressureInTheFireExtinguisher.getText().toString());
-        dataModel.setElectrolyteDensity(electrolyteDensity.getText().toString());
+        if (!motorcade.getText().toString().isEmpty())
+            dataModel.setMotorcade(motorcade.getText().toString());
+        if (!vehicleType.getText().toString().isEmpty())
+            dataModel.setVehicleType(vehicleType.getText().toString());
+        if (!brand.getText().toString().isEmpty())
+            dataModel.setBrand(brand.getText().toString());
+        if (!plateNumber.getText().toString().isEmpty())
+            dataModel.setPlateNumber(plateNumber.getText().toString());
+        if (!inventoryNumber.getText().toString().isEmpty())
+            dataModel.setInventoryNumber(inventoryNumber.getText().toString());
+        if (!garageNumber.getText().toString().isEmpty())
+            dataModel.setGarageNumber(garageNumber.getText().toString());
+        if (!driversList.isEmpty())
+            dataModel.setDrivers(driversList);
+        if (!technicalInspection.getText().toString().isEmpty())
+            dataModel.setTechnicalInspection(technicalInspection.getText().toString());
+        if (!insurance.getText().toString().isEmpty())
+            dataModel.setInsurance(insurance.getText().toString());
+        if (!firstAidKit.getText().toString().isEmpty())
+            dataModel.setFirstAidKit(firstAidKit.getText().toString());
+        if (!extinguisher.getText().toString().isEmpty())
+            dataModel.setExtinguisher(extinguisher.getText().toString());
+        if (!previousTechnicalInspection.getText().toString().isEmpty())
+            dataModel.setPreviousTechnicalInspection(previousTechnicalInspection.getText().toString());
+        if (!comments.getText().toString().isEmpty())
+            dataModel.setComments(comments.getText().toString());
+        if (!coolantDensity.getText().toString().isEmpty())
+            dataModel.setCoolantDensity(coolantDensity.getText().toString());
+        if (!electricalEquipmentState.getText().toString().isEmpty())
+            dataModel.setElectricalEquipmentState(electricalEquipmentState.getText().toString());
+        if (!sufficientPressureInTheFireExtinguisher.getText().toString().isEmpty())
+            dataModel.setSufficientPressureInTheFireExtinguisher(sufficientPressureInTheFireExtinguisher.getText().toString());
+        if (!electrolyteDensity.getText().toString().isEmpty())
+            dataModel.setElectrolyteDensity(electrolyteDensity.getText().toString());
     }
 
     private void showImageImportDialog() {
@@ -167,8 +198,7 @@ public class AddingActivityModer0 extends AppCompatActivity {
                 String filePath = data.getStringExtra(ImageSelectActivity.RESULT_FILE_PATH);
                 CropImage.activity(Uri.fromFile(new File(filePath)))
                         .setGuidelines(CropImageView.Guidelines.ON).start(this);
-            }
-            else if (requestCode == 9917) {
+            } else if (requestCode == 9917) {
                 String filePath = data.getStringExtra(ImageSelectActivity.RESULT_FILE_PATH);
                 uploadFileInFireBaseStorage(Uri.fromFile(new File(filePath)));
             }
@@ -205,7 +235,7 @@ public class AddingActivityModer0 extends AppCompatActivity {
         }
     }
 
-    public void uploadFileInFireBaseStorage (Uri uri){
+    public void uploadFileInFireBaseStorage(Uri uri) {
         initProgressDialog();
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());//получаем время
         final String imageFileName = "photo_" + timeStamp;
@@ -230,7 +260,7 @@ public class AddingActivityModer0 extends AppCompatActivity {
                     System.out.println(downloadUri);
                     dataModel.setPhoto(downloadUri.toString());
                     ivPhoto.setVisibility(View.VISIBLE);
-                    Glide.with(AddingActivityModer0.this) //Takes the context
+                    Glide.with(AddOrChangeActivityModer0.this) //Takes the context
                             .asBitmap()  //Tells glide that it is a bitmap
                             .load(downloadUri)
                             .apply(new RequestOptions()
@@ -251,23 +281,23 @@ public class AddingActivityModer0 extends AppCompatActivity {
         text = text.toUpperCase();
         //the 0, 4 and 5 position must have letters, but it can't be 0
         if (text.charAt(0) == '0') {
-            text = text.substring(0,0)+'O'+text.substring(1);
+            text = text.substring(0, 0) + 'O' + text.substring(1);
         }
         if (text.charAt(4) == '0') {
-            text = text.substring(0,4)+'O'+text.substring(5);
+            text = text.substring(0, 4) + 'O' + text.substring(5);
         }
         if (text.charAt(5) == '0') {
-            text = text.substring(0,5)+'O'+text.substring(6);
+            text = text.substring(0, 5) + 'O' + text.substring(6);
         }
         //positions 1, 2, and 3 must have numbers
         if (text.charAt(1) == 'O') {
-            text = text.substring(0,1)+'0'+text.substring(2);
+            text = text.substring(0, 1) + '0' + text.substring(2);
         }
         if (text.charAt(2) == 'O') {
-            text = text.substring(0,2)+'0'+text.substring(3);
+            text = text.substring(0, 2) + '0' + text.substring(3);
         }
         if (text.charAt(3) == 'O') {
-            text = text.substring(0,3)+'0'+text.substring(4);
+            text = text.substring(0, 3) + '0' + text.substring(4);
         }
         return text.replace("RUS", "").replace(" ", "");
     }

@@ -135,7 +135,20 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         })).setSwipeOptionViews(R.id.edit, R.id.delete).setSwipeable(R.id.rowFG, R.id.rowBG, (new RecyclerTouchListener.OnSwipeOptionsClickListener() {
             public void onSwipeOptionClicked(int viewID, int position) {
                 if (viewID == R.id.edit) {
-                    Toast.makeText(MainActivity.this, "edit " + position, Toast.LENGTH_SHORT).show();
+                    if (myModel.getType().equals("moder0")) {
+                        AddOrChangeActivityModer0.setForChanges(true);
+                        AddOrChangeActivityModer0.setDataModel(items.get(position));
+                        startActivity(new Intent(MainActivity.this, AddOrChangeActivityModer0.class));
+                    }
+                    if (myModel.getType().equals("moder1")) {
+                        startActivity(new Intent(MainActivity.this, AddingActivityModer12.class));
+                    }
+                    if (myModel.getType().equals("moder2")) {
+                        startActivity(new Intent(MainActivity.this, AddingActivityModer12.class));
+                    }
+                    if (myModel.getType().equals("moder3")) {
+                        startActivity(new Intent(MainActivity.this, AddingActivityModer3.class));
+                    }
                 }
                 else if (viewID == R.id.delete) {
                     deleteItem(MainActivity.this, position);
@@ -246,9 +259,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     protected void onResume() {
         super.onResume();
-        if (AddingActivityModer0.isAdded()) {
+        if (AddOrChangeActivityModer0.isAddedOrChanged()) {
             setData();
-            AddingActivityModer0.setIsAdded(false);
+            AddOrChangeActivityModer0.setIsAddedOrChanged(false);
         }
         if (AddingActivityModer12.isAdded()) {
             setData();
@@ -351,7 +364,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     public void onClick(View v) {
         if (myModel.getType().equals("moder0")) {
-            startActivity(new Intent(this, AddingActivityModer0.class));
+            startActivity(new Intent(this, AddOrChangeActivityModer0.class));
         }
         if (myModel.getType().equals("moder1")) {
             startActivity(new Intent(this, AddingActivityModer12.class));
