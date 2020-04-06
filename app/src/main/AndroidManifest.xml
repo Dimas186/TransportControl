@@ -12,6 +12,8 @@
         <activity android:name=".AddingActivityModer3"></activity>
         <activity android:name=".AddingActivityModer12" />
         <activity android:name=".AddingActivityModer0" />
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/AppTheme1"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

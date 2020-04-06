@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.transportcontrol"
-        minSdkVersion 16
+        minSdkVersion 19 //imagePicker
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -38,4 +38,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.gms:play-services-vision:19.0.0'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+    implementation 'com.github.maayyaannkk:ImagePicker:1.0.4'
 }

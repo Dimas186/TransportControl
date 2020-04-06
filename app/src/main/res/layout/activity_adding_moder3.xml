@@ -79,6 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/drivers"
                     android:layout_marginRight="30dp"
+                    android:layout_marginLeft="10dp"
                     android:text="+"
                     android:onClick="onClick"/>
             </RelativeLayout>
@@ -147,6 +148,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/wheelNumbers"
                     android:layout_marginRight="30dp"
+                    android:layout_marginLeft="10dp"
                     android:text="+"
                     android:onClick="onClick"/>
             </RelativeLayout>

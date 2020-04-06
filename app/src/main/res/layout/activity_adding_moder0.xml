@@ -41,15 +41,29 @@
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/brand"
                 android:layout_marginBottom="10dp"/>
-            <EditText
-                android:id="@+id/plateNumber"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:layout_gravity="center_horizontal"
-                android:hint="@string/plateNumber"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="10dp">
+                <EditText
+                    android:id="@+id/plateNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:layout_centerHorizontal="true"
+                    android:hint="@string/plateNumber"
+                    android:layout_marginBottom="10dp"/>
+                <Button
+                    android:id="@+id/scan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/plateNumber"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/scan"
+                    android:onClick="onClick"/>
+            </RelativeLayout>
             <EditText
                 android:id="@+id/inventoryNumber"
                 android:layout_width="wrap_content"
@@ -88,6 +102,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/drivers"
                     android:layout_marginRight="30dp"
+                    android:layout_marginLeft="10dp"
                     android:text="+"
                     android:onClick="onClick"/>
             </RelativeLayout>

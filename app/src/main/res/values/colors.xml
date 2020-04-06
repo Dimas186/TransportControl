@@ -7,4 +7,8 @@
     <color name="swipeoption_green">#36CF8E</color>
     <color name="swipeoption_blue">#3693D0</color>
     <color name="swipeoption_purple">#ff1744</color>
+
+    <color name="app_theme">#F07B1E58</color>
+    <color name="app_theme_light">#7B1E58</color>
+    <color name="app_theme_dark">#3D0F54</color>
 </resources>
