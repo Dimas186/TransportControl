@@ -137,8 +137,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .setMessage("Удалить?")
                 .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // if this button is clicked, close
-                        // current activity
                         itemsRef.child(items.get(position).getId()).removeValue();
                         items.remove(position);
                         mAdapter.removeItem(position);
@@ -146,8 +144,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 })
                 .setNegativeButton("Нет", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // if this button is clicked, just close
-                        // the dialog box and do nothing
                         dialog.cancel();
                     }
                 });
