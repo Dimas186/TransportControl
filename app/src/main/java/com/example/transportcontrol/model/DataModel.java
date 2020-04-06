@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class DataModel {
 
-    private int id;
+    private String id;
     private String motorcade, vehicleType, brand, plateNumber, inventoryNumber, garageNumber;
     private ArrayList<String> drivers;
     private String speedometerReading, technicalInspection, insurance, firstAidKit, extinguisher,
@@ -18,11 +18,11 @@ public class DataModel {
 
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

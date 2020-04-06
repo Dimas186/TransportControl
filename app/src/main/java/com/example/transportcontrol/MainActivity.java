@@ -1,11 +1,14 @@
 package com.example.transportcontrol;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -120,11 +123,40 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     Toast.makeText(MainActivity.this, "edit " + position, Toast.LENGTH_SHORT).show();
                 }
                 else if (viewID == R.id.delete) {
-                    Toast.makeText(MainActivity.this, "change " + position, Toast.LENGTH_SHORT).show();
+                    deleteItem(MainActivity.this, position);
                 }
             }
         }));
         mRecyclerView.addOnItemTouchListener(onTouchListener);
+    }
+
+    public void deleteItem(Context context, final int position) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                context);
+        alertDialogBuilder
+                .setMessage("Удалить?")
+                .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // if this button is clicked, close
+                        // current activity
+                        itemsRef.child(items.get(position).getId()).removeValue();
+                        items.remove(position);
+                        mAdapter.removeItem(position);
+                    }
+                })
+                .setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // if this button is clicked, just close
+                        // the dialog box and do nothing
+                        dialog.cancel();
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
     }
 
     @Override
@@ -180,7 +212,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         myQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                items.add(dataSnapshot.getValue(DataModel.class));
+                DataModel dataModel = dataSnapshot.getValue(DataModel.class);
+                dataModel.setId(dataSnapshot.getKey());
+                items.add(dataModel);
                 setRecyclerViewAdapter();
             }
             @Override
