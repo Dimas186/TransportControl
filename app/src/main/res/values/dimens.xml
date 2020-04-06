@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="swipeWidth">85dp</dimen>
+    <dimen name="padd_10">10dp</dimen>
+</resources>

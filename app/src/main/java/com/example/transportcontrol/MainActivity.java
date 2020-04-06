@@ -2,10 +2,13 @@ package com.example.transportcontrol;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -33,7 +36,7 @@ import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, RecyclerTouchListener.RecyclerTouchListenerHelper {
 
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -48,6 +51,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private DatabaseReference itemsRef;
     private ArrayList<UserModel> users = new ArrayList<>();
     UserModel myModel;
+    private OnActivityTouchListener touchListener;
+    private RecyclerView mRecyclerView;
+    private RVAdapter mAdapter;
+    private RecyclerTouchListener onTouchListener;
     private ArrayList<DataModel> items = new ArrayList<>();
 
     @Override
@@ -80,8 +87,59 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
             startActivityForResult(signInIntent, RC_SIGN_IN);
         } else {
+            initRV();
+            setData();
             Toast.makeText(MainActivity.this, mFirebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void initRV() {
+        mRecyclerView = findViewById(R.id.recyclerView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        onTouchListener = new RecyclerTouchListener(this, mRecyclerView);
+        onTouchListener
+                .setClickable((new RecyclerTouchListener.OnRowClickListener() {
+                    @Override
+                    public void onRowClicked(int position) {
+                        Toast.makeText(MainActivity.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onIndependentViewClicked(int independentViewID, int position) {
+                        //Toast.makeText(MainActivity.this, "Button in row " + (position + 1) + " clicked!", Toast.LENGTH_SHORT).show();
+                    }
+                })).setLongClickable(true, (new RecyclerTouchListener.OnRowLongClickListener() {
+            public void onRowLongClicked(int position) {
+                Toast.makeText(MainActivity.this, "Row " + (position + 1) + " long clicked!", Toast.LENGTH_SHORT).show();
+            }
+        })).setSwipeOptionViews(R.id.edit, R.id.delete).setSwipeable(R.id.rowFG, R.id.rowBG, (new RecyclerTouchListener.OnSwipeOptionsClickListener() {
+            public void onSwipeOptionClicked(int viewID, int position) {
+                if (viewID == R.id.edit) {
+                    Toast.makeText(MainActivity.this, "edit " + position, Toast.LENGTH_SHORT).show();
+                }
+                else if (viewID == R.id.delete) {
+                    Toast.makeText(MainActivity.this, "change " + position, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }));
+        mRecyclerView.addOnItemTouchListener(onTouchListener);
+    }
+
+    @Override
+    public void setOnActivityTouchListener(OnActivityTouchListener listener) {
+        this.touchListener = listener;
+    }
+
+    private void setRecyclerViewAdapter() {
+        mAdapter = new RVAdapter(this, items);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (touchListener != null) {
+            touchListener.getTouchCoordinates(ev);
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
     private void setUsers() {
@@ -121,6 +179,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 items.add(dataSnapshot.getValue(DataModel.class));
+                setRecyclerViewAdapter();
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
