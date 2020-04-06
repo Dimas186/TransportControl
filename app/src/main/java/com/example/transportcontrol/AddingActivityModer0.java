@@ -167,9 +167,15 @@ public class AddingActivityModer0 extends AppCompatActivity {
 
     private String handleText(String text) {
         text = text.toUpperCase();
-        //the 0 position must have letters, but it can't be 0
+        //the 0, 4 and 5 position must have letters, but it can't be 0
         if (text.charAt(0) == '0') {
             text = text.substring(0,0)+'O'+text.substring(1);
+        }
+        if (text.charAt(4) == '0') {
+            text = text.substring(0,4)+'O'+text.substring(5);
+        }
+        if (text.charAt(5) == '0') {
+            text = text.substring(0,5)+'O'+text.substring(6);
         }
         //positions 1, 2, and 3 must have numbers
         if (text.charAt(1) == 'O') {
