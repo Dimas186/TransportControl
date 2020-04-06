@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.transportcontrol.model.DataModel;
@@ -27,6 +28,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,11 +64,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private RecyclerTouchListener onTouchListener;
     private ArrayList<DataModel> items = new ArrayList<>();
     PrefManager prefManager;
+    ProgressBar progressBar;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        progressBar = findViewById(R.id.progressBar);
+        fab = findViewById(R.id.fab);
+        fab.setEnabled(false);//to avoid a departure, you need to wait until the current user's model is found
 
         prefManager = new PrefManager(this);
         database = FirebaseDatabase.getInstance();
@@ -155,11 +162,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                         dialog.cancel();
                     }
                 });
-
-        // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
-
-        // show it
         alertDialog.show();
     }
 
@@ -191,6 +194,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 if (mFirebaseUser != null) {
                     if (userModel.getuId().equals(mFirebaseUser.getUid())) {
                         myModel = userModel;
+                        progressBar.setVisibility(View.GONE);
+                        fab.setEnabled(true);
                         System.out.println(myModel.getType());
                     }
                 }
