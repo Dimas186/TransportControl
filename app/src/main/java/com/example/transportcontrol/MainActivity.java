@@ -2,6 +2,7 @@ package com.example.transportcontrol;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -96,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private void initRV() {
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         onTouchListener = new RecyclerTouchListener(this, mRecyclerView);
         onTouchListener
                 .setClickable((new RecyclerTouchListener.OnRowClickListener() {
