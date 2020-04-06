@@ -155,7 +155,7 @@ public class AddingActivityModer0 extends AppCompatActivity {
                         sb.append(myitem.getValue());
                         sb.append("\n");
                     }
-                    plateNumber.setText(sb.toString());
+                    plateNumber.setText(handleText(sb.toString()));
                 }
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
@@ -163,5 +163,24 @@ public class AddingActivityModer0 extends AppCompatActivity {
                 Toast.makeText(this, "" + error, Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private String handleText(String text) {
+        text = text.toUpperCase();
+        //the 0 position must have letters, but it can't be 0
+        if (text.charAt(0) == '0') {
+            text = text.substring(0,0)+'O'+text.substring(1);
+        }
+        //positions 1, 2, and 3 must have numbers
+        if (text.charAt(1) == 'O') {
+            text = text.substring(0,1)+'0'+text.substring(2);
+        }
+        if (text.charAt(2) == 'O') {
+            text = text.substring(0,2)+'0'+text.substring(3);
+        }
+        if (text.charAt(3) == 'O') {
+            text = text.substring(0,3)+'0'+text.substring(4);
+        }
+        return text.replace("RUS", "").replace(" ", "");
     }
 }
