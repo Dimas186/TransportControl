@@ -161,6 +161,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                         AddOrChangeActivityModer123.setMotorcade("3");
                         startActivity(new Intent(MainActivity.this, AddOrChangeActivityModer123.class));
                     }
+                    if (myModel.getType().equals("user")) {
+                        offer(items.get(position));
+                    }
                 }
                 else if (viewID == R.id.delete) {
                     deleteItem(MainActivity.this, position);
@@ -356,7 +359,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     private void regUser() {
-        final View view = getLayoutInflater().inflate(R.layout.edit_text_dialog, null);
+        final View view = getLayoutInflater().inflate(R.layout.reg_dialog, null);
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Регистрация");
         alertDialog.setCancelable(false);
@@ -377,6 +380,32 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 userModel.setPhone(etPhone.getText().toString());
                 userModel.setType("undefined");
                 usersRef.push().setValue(userModel);
+            }
+        });
+
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Отмена", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        alertDialog.setView(view);
+        alertDialog.show();
+    }
+
+    private void offer(final DataModel dataModel) {
+        final View view = getLayoutInflater().inflate(R.layout.offers_dialog, null);
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Предложение");
+        alertDialog.setCancelable(false);
+        final EditText etOffer = view.findViewById(R.id.etOffer);
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Предложить", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dataModel.setOffers(etOffer.getText().toString());
+                itemsRef.child(dataModel.getId()).setValue(dataModel);
             }
         });
 
