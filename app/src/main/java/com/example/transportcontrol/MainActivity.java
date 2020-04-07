@@ -257,7 +257,21 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 DataModel dataModel = dataSnapshot.getValue(DataModel.class);
                 dataModel.setId(dataSnapshot.getKey());
-                items.add(dataModel);
+
+                //moder0 and user can see all motorcades
+                if (myModel.getType().equals("moder0") || myModel.getType().equals("user")) {
+                    items.add(dataModel);
+                }
+                //others can only see their respective motorcades
+                if (myModel.getType().equals("moder1") && dataModel.getMotorcade().equals("1")) {
+                    items.add(dataModel);
+                }
+                if (myModel.getType().equals("moder2") && dataModel.getMotorcade().equals("2")) {
+                    items.add(dataModel);
+                }
+                if (myModel.getType().equals("moder3") && dataModel.getMotorcade().equals("3")) {
+                    items.add(dataModel);
+                }
                 setRecyclerViewAdapter();
             }
             @Override
