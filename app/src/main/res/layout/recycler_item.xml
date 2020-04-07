@@ -50,7 +50,7 @@
                     android:ellipsize="end"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:text="Перенести"
+                    android:text="@string/edit"
                     android:textColor="@android:color/white"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -90,7 +90,7 @@
                     android:ellipsize="end"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:text="Удалить"
+                    android:text="@string/delete"
                     android:textColor="@android:color/white"
                     android:textSize="12sp" />
             </LinearLayout>

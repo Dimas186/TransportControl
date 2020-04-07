@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         setContentView(R.layout.activity_main);
         progressBar = findViewById(R.id.progressBar);
         fab = findViewById(R.id.fab);
-        fab.setEnabled(false);//to avoid a departure, you need to wait until the current user's model is found
+        fab.hide();//to avoid a departure, you need to wait until the current user's model is found
 
         prefManager = new PrefManager(this);
         database = FirebaseDatabase.getInstance();
@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     if (userModel.getuId().equals(mFirebaseUser.getUid())) {
                         myModel = userModel;
                         progressBar.setVisibility(View.GONE);
-                        fab.setEnabled(true);
+                        fab.show();
                         System.out.println(myModel.getType());
                     }
                 }

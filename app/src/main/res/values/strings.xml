@@ -26,4 +26,6 @@
     <string name="etLastName">Фамилия</string>
     <string name="etMiddleName">Отчество</string>
     <string name="phone">Телефон</string>
+    <string name="edit">Редактировать</string>
+    <string name="delete">Удалить</string>
 </resources>
