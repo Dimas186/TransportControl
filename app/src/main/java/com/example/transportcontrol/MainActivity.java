@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.transportcontrol.model.DataModel;
@@ -65,15 +66,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private ArrayList<DataModel> items = new ArrayList<>();
     PrefManager prefManager;
     ProgressBar progressBar;
-    FloatingActionButton fab;
+    FloatingActionButton fabAddItem;
+    TextView tvUnconfirmedAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         progressBar = findViewById(R.id.progressBar);
-        fab = findViewById(R.id.fab);
-        fab.hide();//to avoid a departure, you need to wait until the current user's model is found
+        tvUnconfirmedAccount = findViewById(R.id.tvUnconfirmedAccount);
+        fabAddItem = findViewById(R.id.fab);
+        fabAddItem.hide();//to avoid a departure, you need to wait until the current user's model is found
 
         prefManager = new PrefManager(this);
         database = FirebaseDatabase.getInstance();
@@ -214,7 +217,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     if (userModel.getuId().equals(mFirebaseUser.getUid())) {
                         myModel = userModel;
                         progressBar.setVisibility(View.GONE);
-                        fab.show();
+                        //user and undefined user can't add items
+                        if (!myModel.getType().equals("user") && !myModel.getType().equals("undefined")) {
+                            fabAddItem.show();
+                        }
+                        if (myModel.getType().equals("undefined")) {
+                            mRecyclerView.setVisibility(View.GONE);
+                            tvUnconfirmedAccount.setVisibility(View.VISIBLE);
+                        }
                         System.out.println(myModel.getType());
                     }
                 }
