@@ -44,7 +44,7 @@ import in.mayanknagwanshi.imagepicker.ImageSelectActivity;
 
 public class AddOrChangeActivityModer123 extends AppCompatActivity {
 
-    EditText motorcade, vehicleType, brand, plateNumber, inventoryNumber, garageNumber, drivers, technicalInspection;
+    EditText vehicleType, brand, plateNumber, inventoryNumber, garageNumber, drivers, technicalInspection;
     EditText insurance, firstAidKit, extinguisher, previousTechnicalInspection, wheelNumbers, eliminationDate;
     ImageView ivPhoto;
     static DataModel dataModel = new DataModel();
@@ -74,6 +74,12 @@ public class AddOrChangeActivityModer123 extends AppCompatActivity {
     public static void setDataModel(DataModel dataModel) {
         AddOrChangeActivityModer123.dataModel = dataModel;
     }
+
+    public static void setMotorcade(String motorcade) {
+        AddOrChangeActivityModer123.motorcade = motorcade;
+    }
+
+    private static String motorcade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +126,6 @@ public class AddOrChangeActivityModer123 extends AppCompatActivity {
     }
 
     private void initViews() {
-        motorcade = findViewById(R.id.motorcade);
         vehicleType = findViewById(R.id.vehicleType);
         brand = findViewById(R.id.brand);
         plateNumber = findViewById(R.id.plateNumber);
@@ -147,8 +152,8 @@ public class AddOrChangeActivityModer123 extends AppCompatActivity {
     }
 
     private void setDataModel() {
-        if (!motorcade.getText().toString().isEmpty())
-            dataModel.setMotorcade(motorcade.getText().toString());
+        System.out.println(motorcade);
+        dataModel.setMotorcade(motorcade);
         if (!vehicleType.getText().toString().isEmpty())
             dataModel.setVehicleType(vehicleType.getText().toString());
         if (!brand.getText().toString().isEmpty())
