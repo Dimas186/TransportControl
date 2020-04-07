@@ -141,13 +141,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                         startActivity(new Intent(MainActivity.this, AddOrChangeActivityModer0.class));
                     }
                     if (myModel.getType().equals("moder1")) {
-                        startActivity(new Intent(MainActivity.this, AddingActivityModer12.class));
+                        AddOrChangeActivityModer123.setForChanges(true);
+                        AddOrChangeActivityModer123.setDataModel(items.get(position));
+                        startActivity(new Intent(MainActivity.this, AddOrChangeActivityModer123.class));
                     }
                     if (myModel.getType().equals("moder2")) {
-                        startActivity(new Intent(MainActivity.this, AddingActivityModer12.class));
+                        AddOrChangeActivityModer123.setForChanges(true);
+                        AddOrChangeActivityModer123.setDataModel(items.get(position));
+                        startActivity(new Intent(MainActivity.this, AddOrChangeActivityModer123.class));
                     }
                     if (myModel.getType().equals("moder3")) {
-                        startActivity(new Intent(MainActivity.this, AddingActivityModer3.class));
+                        AddOrChangeActivityModer123.setForChanges(true);
+                        AddOrChangeActivityModer123.setDataModel(items.get(position));
+                        startActivity(new Intent(MainActivity.this, AddOrChangeActivityModer123.class));
                     }
                 }
                 else if (viewID == R.id.delete) {
@@ -263,13 +269,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             setData();
             AddOrChangeActivityModer0.setIsAddedOrChanged(false);
         }
-        if (AddingActivityModer12.isAdded()) {
+        if (AddOrChangeActivityModer123.isAddedOrChanged()) {
             setData();
-            AddingActivityModer12.setIsAdded(false);
-        }
-        if (AddingActivityModer3.isAdded()) {
-            setData();
-            AddingActivityModer3.setIsAdded(false);
+            AddOrChangeActivityModer123.setIsAddedOrChanged(false);
         }
     }
 
@@ -367,13 +369,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             startActivity(new Intent(this, AddOrChangeActivityModer0.class));
         }
         if (myModel.getType().equals("moder1")) {
-            startActivity(new Intent(this, AddingActivityModer12.class));
+            startActivity(new Intent(this, AddOrChangeActivityModer123.class));
         }
         if (myModel.getType().equals("moder2")) {
-            startActivity(new Intent(this, AddingActivityModer12.class));
+            startActivity(new Intent(this, AddOrChangeActivityModer123.class));
         }
         if (myModel.getType().equals("moder3")) {
-            startActivity(new Intent(this, AddingActivityModer3.class));
+            startActivity(new Intent(this, AddOrChangeActivityModer123.class));
         }
     }
 }

@@ -78,7 +78,7 @@ public class AddOrChangeActivityModer0 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_adding_moder0);
+        setContentView(R.layout.activity_add_or_change_moder0);
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("items");

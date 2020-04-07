@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AddingActivityModer3"></activity>
-        <activity android:name=".AddingActivityModer12" />
+        <activity android:name=".AddOrChangeActivityModer123" />
         <activity android:name=".AddOrChangeActivityModer0" />
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/AppTheme1"/>
