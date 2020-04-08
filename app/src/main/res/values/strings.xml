@@ -29,5 +29,5 @@
     <string name="edit">Редактировать</string>
     <string name="delete">Удалить</string>
     <string name="unconfirmed_account">Ваш аккаунт ещё не подтверждён</string>
-    <string name="offer">Предложение</string>
+    <string name="offer">Введите предложение…</string>
 </resources>

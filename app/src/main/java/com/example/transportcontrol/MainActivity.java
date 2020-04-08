@@ -398,7 +398,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         final View view = getLayoutInflater().inflate(R.layout.offers_dialog, null);
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Предложение");
-        alertDialog.setCancelable(false);
         final EditText etOffer = view.findViewById(R.id.etOffer);
 
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Предложить", new DialogInterface.OnClickListener() {
@@ -413,7 +412,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Отмена", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                finish();
+                dialog.cancel();
             }
         });
         alertDialog.setView(view);
