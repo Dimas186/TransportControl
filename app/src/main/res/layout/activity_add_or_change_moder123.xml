@@ -20,7 +20,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textPersonName|textCapSentences"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/vehicleType"
                 android:layout_marginBottom="10dp"/>
@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textPersonName|textCapSentences"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/brand"
                 android:layout_marginBottom="10dp"/>
@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:inputType="textPersonName|textCapCharacters"
                     android:layout_centerHorizontal="true"
                     android:hint="@string/plateNumber"
                     android:layout_marginBottom="10dp"/>
@@ -83,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:inputType="textPersonName|textCapSentences"
                     android:layout_gravity="center_horizontal"
                     android:hint="@string/drivers"
                     android:layout_centerInParent="true" />
@@ -103,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="date"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/technicalInspection"
                 android:layout_marginBottom="10dp"/>
@@ -112,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="date"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/insurance"
                 android:layout_marginBottom="10dp"/>
@@ -121,7 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="date"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/firstAidKit"
                 android:layout_marginBottom="10dp"/>
@@ -130,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="date"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/extinguisher"
                 android:layout_marginBottom="10dp"/>
