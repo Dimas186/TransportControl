@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .setClickable((new RecyclerTouchListener.OnRowClickListener() {
                     @Override
                     public void onRowClicked(int position) {
-                        Toast.makeText(MainActivity.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
+                        showInformationDialog(position);
                     }
 
                     @Override
@@ -175,6 +175,22 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
+
+    private void showInformationDialog(int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(items.get(position).getBrand())
+                .setMessage(DataModelToTextHandler.handle(items.get(position)))
+                .setCancelable(true)
+                .setNegativeButton("Ок",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
 
     @Override
     public void setOnActivityTouchListener(OnActivityTouchListener listener) {

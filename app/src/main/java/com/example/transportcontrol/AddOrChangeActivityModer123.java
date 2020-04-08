@@ -301,6 +301,7 @@ public class AddOrChangeActivityModer123 extends AppCompatActivity {
         if (text.charAt(3) == 'O') {
             text = text.substring(0, 3) + '0' + text.substring(4);
         }
-        return text.replace("RUS", "").replace(" ", "");
+        return text.replace("RUS", "").replace(" ", "")
+                .replace("\n", "");
     }
 }
