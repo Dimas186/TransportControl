@@ -84,6 +84,7 @@ public class AddOrChangeActivityModer0 extends AppCompatActivity {
         myRef = database.getReference("items");
         mStorageRef = FirebaseStorage.getInstance().getReference();
         initViews();
+        setEditTexts();
     }
 
     public void onClick(View v) {
@@ -148,40 +149,42 @@ public class AddOrChangeActivityModer0 extends AppCompatActivity {
     }
 
     private void setDataModel() {
-        if (!motorcade.getText().toString().isEmpty())
-            dataModel.setMotorcade(motorcade.getText().toString());
-        if (!vehicleType.getText().toString().isEmpty())
-            dataModel.setVehicleType(vehicleType.getText().toString());
-        if (!brand.getText().toString().isEmpty())
-            dataModel.setBrand(brand.getText().toString());
-        if (!plateNumber.getText().toString().isEmpty())
-            dataModel.setPlateNumber(plateNumber.getText().toString());
-        if (!inventoryNumber.getText().toString().isEmpty())
-            dataModel.setInventoryNumber(inventoryNumber.getText().toString());
-        if (!garageNumber.getText().toString().isEmpty())
-            dataModel.setGarageNumber(garageNumber.getText().toString());
-        if (!driversList.isEmpty())
-            dataModel.setDrivers(driversList);
-        if (!technicalInspection.getText().toString().isEmpty())
-            dataModel.setTechnicalInspection(technicalInspection.getText().toString());
-        if (!insurance.getText().toString().isEmpty())
-            dataModel.setInsurance(insurance.getText().toString());
-        if (!firstAidKit.getText().toString().isEmpty())
-            dataModel.setFirstAidKit(firstAidKit.getText().toString());
-        if (!extinguisher.getText().toString().isEmpty())
-            dataModel.setExtinguisher(extinguisher.getText().toString());
-        if (!previousTechnicalInspection.getText().toString().isEmpty())
-            dataModel.setPreviousTechnicalInspection(previousTechnicalInspection.getText().toString());
-        if (!comments.getText().toString().isEmpty())
-            dataModel.setComments(comments.getText().toString());
-        if (!coolantDensity.getText().toString().isEmpty())
-            dataModel.setCoolantDensity(coolantDensity.getText().toString());
-        if (!electricalEquipmentState.getText().toString().isEmpty())
-            dataModel.setElectricalEquipmentState(electricalEquipmentState.getText().toString());
-        if (!sufficientPressureInTheFireExtinguisher.getText().toString().isEmpty())
-            dataModel.setSufficientPressureInTheFireExtinguisher(sufficientPressureInTheFireExtinguisher.getText().toString());
-        if (!electrolyteDensity.getText().toString().isEmpty())
-            dataModel.setElectrolyteDensity(electrolyteDensity.getText().toString());
+        dataModel.setMotorcade(motorcade.getText().toString());
+        dataModel.setVehicleType(vehicleType.getText().toString());
+        dataModel.setBrand(brand.getText().toString());
+        dataModel.setPlateNumber(plateNumber.getText().toString());
+        dataModel.setInventoryNumber(inventoryNumber.getText().toString());
+        dataModel.setGarageNumber(garageNumber.getText().toString());
+        dataModel.setDrivers(driversList);
+        dataModel.setTechnicalInspection(technicalInspection.getText().toString());
+        dataModel.setInsurance(insurance.getText().toString());
+        dataModel.setFirstAidKit(firstAidKit.getText().toString());
+        dataModel.setExtinguisher(extinguisher.getText().toString());
+        dataModel.setPreviousTechnicalInspection(previousTechnicalInspection.getText().toString());
+        dataModel.setComments(comments.getText().toString());
+        dataModel.setCoolantDensity(coolantDensity.getText().toString());
+        dataModel.setElectricalEquipmentState(electricalEquipmentState.getText().toString());
+        dataModel.setSufficientPressureInTheFireExtinguisher(sufficientPressureInTheFireExtinguisher.getText().toString());
+        dataModel.setElectrolyteDensity(electrolyteDensity.getText().toString());
+    }
+
+    private void setEditTexts() {
+        motorcade.setText(dataModel.getMotorcade());
+        vehicleType.setText(dataModel.getVehicleType());
+        brand.setText(dataModel.getBrand());
+        plateNumber.setText(dataModel.getPlateNumber());
+        inventoryNumber.setText(dataModel.getInventoryNumber());
+        garageNumber.setText(dataModel.getGarageNumber());
+        technicalInspection.setText(dataModel.getTechnicalInspection());
+        insurance.setText(dataModel.getInsurance());
+        firstAidKit.setText(dataModel.getFirstAidKit());
+        extinguisher.setText(dataModel.getExtinguisher());
+        previousTechnicalInspection.setText(dataModel.getPreviousTechnicalInspection());
+        comments.setText(dataModel.getComments());
+        coolantDensity.setText(dataModel.getCoolantDensity());
+        electricalEquipmentState.setText(dataModel.getElectricalEquipmentState());
+        sufficientPressureInTheFireExtinguisher.setText(dataModel.getSufficientPressureInTheFireExtinguisher());
+        electrolyteDensity.setText(dataModel.getElectrolyteDensity());
     }
 
     private void showImageImportDialog() {
