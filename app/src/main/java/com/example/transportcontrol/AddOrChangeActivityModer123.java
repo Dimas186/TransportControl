@@ -90,6 +90,7 @@ public class AddOrChangeActivityModer123 extends AppCompatActivity {
         myRef = database.getReference("items");
         mStorageRef = FirebaseStorage.getInstance().getReference();
         initViews();
+        setEditTexts();
     }
 
     public void onClick(View v) {
@@ -154,32 +155,33 @@ public class AddOrChangeActivityModer123 extends AppCompatActivity {
     private void setDataModel() {
         System.out.println(motorcade);
         dataModel.setMotorcade(motorcade);
-        if (!vehicleType.getText().toString().isEmpty())
-            dataModel.setVehicleType(vehicleType.getText().toString());
-        if (!brand.getText().toString().isEmpty())
-            dataModel.setBrand(brand.getText().toString());
-        if (!plateNumber.getText().toString().isEmpty())
-            dataModel.setPlateNumber(plateNumber.getText().toString());
-        if (!inventoryNumber.getText().toString().isEmpty())
-            dataModel.setInventoryNumber(inventoryNumber.getText().toString());
-        if (!garageNumber.getText().toString().isEmpty())
-            dataModel.setGarageNumber(garageNumber.getText().toString());
-        if (!driversList.isEmpty())
-            dataModel.setDrivers(driversList);
-        if (!technicalInspection.getText().toString().isEmpty())
-            dataModel.setTechnicalInspection(technicalInspection.getText().toString());
-        if (!insurance.getText().toString().isEmpty())
-            dataModel.setInsurance(insurance.getText().toString());
-        if (!firstAidKit.getText().toString().isEmpty())
-            dataModel.setFirstAidKit(firstAidKit.getText().toString());
-        if (!extinguisher.getText().toString().isEmpty())
-            dataModel.setExtinguisher(extinguisher.getText().toString());
-        if (!previousTechnicalInspection.getText().toString().isEmpty())
-            dataModel.setPreviousTechnicalInspection(previousTechnicalInspection.getText().toString());
-        if (!wheelNumbersList.isEmpty())
-            dataModel.setWheelNumbers(wheelNumbersList);
-        if (!eliminationDate.getText().toString().isEmpty())
-            dataModel.setEliminationDate(eliminationDate.getText().toString());
+        dataModel.setVehicleType(vehicleType.getText().toString());
+        dataModel.setBrand(brand.getText().toString());
+        dataModel.setPlateNumber(plateNumber.getText().toString());
+        dataModel.setInventoryNumber(inventoryNumber.getText().toString());
+        dataModel.setGarageNumber(garageNumber.getText().toString());
+        dataModel.setDrivers(driversList);
+        dataModel.setTechnicalInspection(technicalInspection.getText().toString());
+        dataModel.setInsurance(insurance.getText().toString());
+        dataModel.setFirstAidKit(firstAidKit.getText().toString());
+        dataModel.setExtinguisher(extinguisher.getText().toString());
+        dataModel.setPreviousTechnicalInspection(previousTechnicalInspection.getText().toString());
+        dataModel.setWheelNumbers(wheelNumbersList);
+        dataModel.setEliminationDate(eliminationDate.getText().toString());
+    }
+
+    private void setEditTexts() {
+        vehicleType.setText(dataModel.getVehicleType());
+        brand.setText(dataModel.getBrand());
+        plateNumber.setText(dataModel.getPlateNumber());
+        inventoryNumber.setText(dataModel.getInventoryNumber());
+        garageNumber.setText(dataModel.getGarageNumber());
+        technicalInspection.setText(dataModel.getTechnicalInspection());
+        insurance.setText(dataModel.getInsurance());
+        firstAidKit.setText(dataModel.getFirstAidKit());
+        extinguisher.setText(dataModel.getExtinguisher());
+        previousTechnicalInspection.setText(dataModel.getPreviousTechnicalInspection());
+        eliminationDate.setText(dataModel.getEliminationDate());
     }
 
     private void showImageImportDialog() {
