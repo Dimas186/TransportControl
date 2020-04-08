@@ -48,13 +48,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
-
     private GoogleApiClient mGoogleApiClient;
-
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
-
-    private FirebaseDatabase database;
     private DatabaseReference usersRef;
     private DatabaseReference itemsRef;
     private ArrayList<UserModel> users = new ArrayList<>();
@@ -62,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private OnActivityTouchListener touchListener;
     private RecyclerView mRecyclerView;
     private RVAdapter mAdapter;
-    private RecyclerTouchListener onTouchListener;
     private ArrayList<DataModel> items = new ArrayList<>();
     PrefManager prefManager;
     ProgressBar progressBar;
@@ -79,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         fabAddItem.hide();//to avoid a departure, you need to wait until the current user's model is found
 
         prefManager = new PrefManager(this);
-        database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         usersRef = database.getReference("users");
         itemsRef = database.getReference("items");
         setUsers();
@@ -108,8 +103,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         } else {
             if (prefManager.isUserRegistered()) {
                 Toast.makeText(MainActivity.this, mFirebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
                 regUser();
             }
         }
@@ -119,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        onTouchListener = new RecyclerTouchListener(this, mRecyclerView);
+        RecyclerTouchListener onTouchListener = new RecyclerTouchListener(this, mRecyclerView);
         onTouchListener
                 .setClickable((new RecyclerTouchListener.OnRowClickListener() {
                     @Override
@@ -164,8 +158,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     if (myModel.getType().equals("user")) {
                         offer(items.get(position));
                     }
-                }
-                else if (viewID == R.id.delete) {
+                } else if (viewID == R.id.delete) {
                     deleteItem(MainActivity.this, position);
                 }
             }
@@ -236,15 +229,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 }
                 users.add(userModel);
             }
+
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
             }
+
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
             }
+
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -277,15 +274,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 }
                 setRecyclerViewAdapter();
             }
+
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
             }
+
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
             }
+
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -347,8 +348,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                             }
                             if (!userIsRegistered) {
                                 regUser();
-                            }
-                            else {
+                            } else {
                                 prefManager.setUserRegistered(true);
                             }
                             mFirebaseUser = mFirebaseAuth.getCurrentUser();
