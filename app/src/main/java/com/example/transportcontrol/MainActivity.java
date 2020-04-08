@@ -137,22 +137,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                         AddOrChangeActivityModer0.setDataModel(items.get(position));
                         startActivity(new Intent(MainActivity.this, AddOrChangeActivityModer0.class));
                     }
-                    if (myModel.getType().equals("moder1")) {
+                    if (myModel.getType().equals("moder1")
+                            || myModel.getType().equals("moder2")
+                            || myModel.getType().equals("moder3")) {
+                        AddOrChangeActivityModer123.setMotorcade(myModel.getType()
+                                .replace("moder", ""));
                         AddOrChangeActivityModer123.setForChanges(true);
                         AddOrChangeActivityModer123.setDataModel(items.get(position));
-                        AddOrChangeActivityModer123.setMotorcade("1");
-                        startActivity(new Intent(MainActivity.this, AddOrChangeActivityModer123.class));
-                    }
-                    if (myModel.getType().equals("moder2")) {
-                        AddOrChangeActivityModer123.setForChanges(true);
-                        AddOrChangeActivityModer123.setDataModel(items.get(position));
-                        AddOrChangeActivityModer123.setMotorcade("2");
-                        startActivity(new Intent(MainActivity.this, AddOrChangeActivityModer123.class));
-                    }
-                    if (myModel.getType().equals("moder3")) {
-                        AddOrChangeActivityModer123.setForChanges(true);
-                        AddOrChangeActivityModer123.setDataModel(items.get(position));
-                        AddOrChangeActivityModer123.setMotorcade("3");
                         startActivity(new Intent(MainActivity.this, AddOrChangeActivityModer123.class));
                     }
                     if (myModel.getType().equals("user")) {
