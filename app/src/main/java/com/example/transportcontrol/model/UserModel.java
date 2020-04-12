@@ -2,9 +2,9 @@ package com.example.transportcontrol.model;
 
 public class UserModel {
 
-    String uId;
-    String name, lastName, middleName, phone;
-    String type; //moder0, moder1, moder2, moder3, user
+    private String uId;
+    private String name, lastName, middleName, phone;
+    private String type; //moder0, moder1, moder2, moder3, user
 
     public UserModel() {
 

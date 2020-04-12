@@ -91,7 +91,9 @@ public class AddOrChangeActivityModer0 extends AppCompatActivity {
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
-        driversList.addAll(dataModel.getDrivers());
+        if (forChanges) {
+            driversList.addAll(dataModel.getDrivers());
+        }
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("items");
         logsRef = database.getReference("logs");
@@ -129,6 +131,7 @@ public class AddOrChangeActivityModer0 extends AppCompatActivity {
                     addLog("");
                 }
                 isAddedOrChanged = true;
+                forChanges = false;
                 finish();
                 break;
         }

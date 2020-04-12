@@ -97,8 +97,10 @@ public class AddOrChangeActivityModer123 extends AppCompatActivity {
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
-        driversList.addAll(dataModel.getDrivers());
-        wheelNumbersList.addAll(dataModel.getWheelNumbers());
+        if (forChanges) {
+            driversList.addAll(dataModel.getDrivers());
+            wheelNumbersList.addAll(dataModel.getWheelNumbers());
+        }
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("items");
         logsRef = database.getReference("logs");
@@ -140,6 +142,7 @@ public class AddOrChangeActivityModer123 extends AppCompatActivity {
                     addLog("");
                 }
                 isAddedOrChanged = true;
+                forChanges = false;
                 finish();
                 break;
         }

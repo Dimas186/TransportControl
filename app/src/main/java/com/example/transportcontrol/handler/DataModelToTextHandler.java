@@ -4,27 +4,25 @@ import com.example.transportcontrol.model.DataModel;
 
 public class DataModelToTextHandler {
     public static String handle(DataModel dataModel) {
-        StringBuilder result = new StringBuilder();
-        result.append("Автоколонна: ").append(dataModel.getMotorcade()).append("\n\n");
-        result.append("Тип ТС: ").append(dataModel.getVehicleType()).append("\n\n");
-        result.append("Марка: ").append(dataModel.getBrand()).append("\n\n");
-        result.append("Гос. Номер: ").append(dataModel.getPlateNumber()).append("\n\n");
-        result.append("Инвентарный номер: ").append(dataModel.getInventoryNumber()).append("\n\n");
-        result.append("Гаражный номер: ").append(dataModel.getGarageNumber()).append("\n\n");
-        result.append("Закрепленные водители: ").append(dataModel.getDrivers()).append("\n\n");
-        result.append("Тех. Осмотр: ").append(dataModel.getTechnicalInspection()).append("\n\n");
-        result.append("Страховка: ").append(dataModel.getInsurance()).append("\n\n");
-        result.append("Аптечка: ").append(dataModel.getFirstAidKit()).append("\n\n");
-        result.append("Огнетушитель: ").append(dataModel.getExtinguisher()).append("\n\n");
-        result.append("Дата проведения Предыдущего ТО: ").append(dataModel.getPreviousTechnicalInspection()).append("\n\n");
-        result.append("Номера колес: ").append(dataModel.getWheelNumbers()).append("\n\n");
-        result.append("Замечания: ").append(dataModel.getComments()).append("\n\n");
-        result.append("Дата устранения: ").append(dataModel.getEliminationDate()).append("\n\n");
-        result.append("Плотность ОЖ: ").append(dataModel.getCoolantDensity()).append("\n\n");
-        result.append("Состояние электрооборудования: ").append(dataModel.getElectricalEquipmentState()).append("\n\n");
-        result.append("Достаточное давление в огнетушителе: ").append(dataModel.getSufficientPressureInTheFireExtinguisher()).append("\n\n");
-        result.append("Плотность электролита (Состояние АКБ): ").append(dataModel.getElectrolyteDensity()).append("\n\n");
-        result.append("Предложение: ").append(dataModel.getOffers()).append("\n\n");
-        return result.toString();
+        return "Автоколонна: " + dataModel.getMotorcade() + "\n\n" +
+                "Тип ТС: " + dataModel.getVehicleType() + "\n\n" +
+                "Марка: " + dataModel.getBrand() + "\n\n" +
+                "Гос. Номер: " + dataModel.getPlateNumber() + "\n\n" +
+                "Инвентарный номер: " + dataModel.getInventoryNumber() + "\n\n" +
+                "Гаражный номер: " + dataModel.getGarageNumber() + "\n\n" +
+                "Закрепленные водители: " + dataModel.getDrivers() + "\n\n" +
+                "Тех. Осмотр: " + dataModel.getTechnicalInspection() + "\n\n" +
+                "Страховка: " + dataModel.getInsurance() + "\n\n" +
+                "Аптечка: " + dataModel.getFirstAidKit() + "\n\n" +
+                "Огнетушитель: " + dataModel.getExtinguisher() + "\n\n" +
+                "Дата проведения Предыдущего ТО: " + dataModel.getPreviousTechnicalInspection() + "\n\n" +
+                "Номера колес: " + dataModel.getWheelNumbers() + "\n\n" +
+                "Замечания: " + dataModel.getComments() + "\n\n" +
+                "Дата устранения: " + dataModel.getEliminationDate() + "\n\n" +
+                "Плотность ОЖ: " + dataModel.getCoolantDensity() + "\n\n" +
+                "Состояние электрооборудования: " + dataModel.getElectricalEquipmentState() + "\n\n" +
+                "Достаточное давление в огнетушителе: " + dataModel.getSufficientPressureInTheFireExtinguisher() + "\n\n" +
+                "Плотность электролита (Состояние АКБ): " + dataModel.getElectrolyteDensity() + "\n\n" +
+                "Предложение: " + dataModel.getOffers() + "\n\n";
     }
 }

@@ -7,15 +7,11 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.SparseArray;
 import android.widget.Toast;
-
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 import com.theartofdev.edmodo.cropper.CropImage;
-
 import java.io.IOException;
-
-import static com.example.transportcontrol.handler.PlateNumberHandler.handleText;
 
 public class OCRHandler {
 

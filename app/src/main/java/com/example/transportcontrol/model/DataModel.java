@@ -9,7 +9,7 @@ public class DataModel implements Cloneable{
     private String id;
     private String motorcade, vehicleType, brand, plateNumber, inventoryNumber, garageNumber;
     private ArrayList<String> drivers;
-    private String speedometerReading, technicalInspection, insurance, firstAidKit, extinguisher,
+    private String technicalInspection, insurance, firstAidKit, extinguisher,
             previousTechnicalInspection;
     private ArrayList<String> wheelNumbers;
     private String comments, eliminationDate, coolantDensity, electricalEquipmentState;
@@ -96,14 +96,6 @@ public class DataModel implements Cloneable{
 
     public void setDrivers(ArrayList<String> drivers) {
         this.drivers = drivers;
-    }
-
-    public String getSpeedometerReading() {
-        return speedometerReading;
-    }
-
-    public void setSpeedometerReading(String speedometerReading) {
-        this.speedometerReading = speedometerReading;
     }
 
     public String getTechnicalInspection() {
