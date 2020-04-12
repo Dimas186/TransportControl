@@ -38,6 +38,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -51,10 +52,12 @@ public class AddOrChangeActivityModer123 extends AppCompatActivity {
     EditText insurance, firstAidKit, extinguisher, previousTechnicalInspection, wheelNumbers, eliminationDate;
     ImageView ivPhoto;
     static DataModel dataModel = new DataModel();
+    DataModel changedDataModel = new DataModel();
     ArrayList<String> driversList = new ArrayList<>();
     ArrayList<String> wheelNumbersList = new ArrayList<>();
     private FirebaseDatabase database;
     private DatabaseReference myRef;
+    private DatabaseReference logsRef;
     private StorageReference mStorageRef;
     ProgressDialog progressDialog;
 
@@ -89,8 +92,16 @@ public class AddOrChangeActivityModer123 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_or_change_moder123);
 
+        try {
+            changedDataModel = dataModel.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        driversList.addAll(dataModel.getDrivers());
+        wheelNumbersList.addAll(dataModel.getWheelNumbers());
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("items");
+        logsRef = database.getReference("logs");
         mStorageRef = FirebaseStorage.getInstance().getReference();
         initViews();
         setEditTexts();
@@ -117,15 +128,34 @@ public class AddOrChangeActivityModer123 extends AppCompatActivity {
                 startActivityForResult(intent, 9917);
                 break;
             case R.id.btnAddOrChange:
-                setDataModel();
+                updateDataModel();
                 if (forChanges) {
-                    myRef.child(dataModel.getId()).setValue(dataModel);
+                    String changes = DataModelChangeFinder.getChanges(this, dataModel, changedDataModel);
+                    if (!changes.isEmpty()) {
+                        myRef.child(dataModel.getId()).setValue(changedDataModel);
+                    }
+                    addLog(changes);
                 } else {
-                    myRef.push().setValue(dataModel);
+                    myRef.push().setValue(changedDataModel);
+                    addLog("");
                 }
                 isAddedOrChanged = true;
                 finish();
                 break;
+        }
+    }
+
+    private void addLog(String changes) {
+        String userName = MainActivity.getmFirebaseUser().getDisplayName();
+        String time = new SimpleDateFormat("dd.MM.yyyy hh:mm").format(Calendar.getInstance().getTime());
+        if (forChanges) {
+            if (!changes.isEmpty()) {
+                logsRef.push()
+                        .setValue(getString(R.string.changedBy, userName, changes, plateNumber.getText().toString(), time));
+            }
+        }
+        else {
+            logsRef.push().setValue(getString(R.string.addedBy, userName, plateNumber.getText().toString(), time));
         }
     }
 
@@ -155,22 +185,21 @@ public class AddOrChangeActivityModer123 extends AppCompatActivity {
         progressDialog.show();
     }
 
-    private void setDataModel() {
-        System.out.println(motorcade);
-        dataModel.setMotorcade(motorcade);
-        dataModel.setVehicleType(vehicleType.getText().toString());
-        dataModel.setBrand(brand.getText().toString());
-        dataModel.setPlateNumber(plateNumber.getText().toString());
-        dataModel.setInventoryNumber(inventoryNumber.getText().toString());
-        dataModel.setGarageNumber(garageNumber.getText().toString());
-        dataModel.setDrivers(driversList);
-        dataModel.setTechnicalInspection(technicalInspection.getText().toString());
-        dataModel.setInsurance(insurance.getText().toString());
-        dataModel.setFirstAidKit(firstAidKit.getText().toString());
-        dataModel.setExtinguisher(extinguisher.getText().toString());
-        dataModel.setPreviousTechnicalInspection(previousTechnicalInspection.getText().toString());
-        dataModel.setWheelNumbers(wheelNumbersList);
-        dataModel.setEliminationDate(eliminationDate.getText().toString());
+    private void updateDataModel() {
+        changedDataModel.setMotorcade(motorcade);
+        changedDataModel.setVehicleType(vehicleType.getText().toString());
+        changedDataModel.setBrand(brand.getText().toString());
+        changedDataModel.setPlateNumber(plateNumber.getText().toString());
+        changedDataModel.setInventoryNumber(inventoryNumber.getText().toString());
+        changedDataModel.setGarageNumber(garageNumber.getText().toString());
+        changedDataModel.setDrivers(driversList);
+        changedDataModel.setTechnicalInspection(technicalInspection.getText().toString());
+        changedDataModel.setInsurance(insurance.getText().toString());
+        changedDataModel.setFirstAidKit(firstAidKit.getText().toString());
+        changedDataModel.setExtinguisher(extinguisher.getText().toString());
+        changedDataModel.setPreviousTechnicalInspection(previousTechnicalInspection.getText().toString());
+        changedDataModel.setWheelNumbers(wheelNumbersList);
+        changedDataModel.setEliminationDate(eliminationDate.getText().toString());
     }
 
     private void setEditTexts() {
@@ -242,7 +271,7 @@ public class AddOrChangeActivityModer123 extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
                     System.out.println(downloadUri);
-                    dataModel.setPhoto(downloadUri.toString());
+                    changedDataModel.setPhoto(downloadUri.toString());
                     ivPhoto.setVisibility(View.VISIBLE);
                     Glide.with(AddOrChangeActivityModer123.this) //Takes the context
                             .asBitmap()  //Tells glide that it is a bitmap

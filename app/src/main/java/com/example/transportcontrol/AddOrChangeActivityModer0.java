@@ -89,7 +89,6 @@ public class AddOrChangeActivityModer0 extends AppCompatActivity {
         try {
             changedDataModel = dataModel.clone();
         } catch (CloneNotSupportedException e) {
-            System.out.println("AAAAAAAAAW");
             e.printStackTrace();
         }
         driversList.addAll(dataModel.getDrivers());
