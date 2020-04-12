@@ -246,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         itemsRef.child(items.get(position).getId()).removeValue();
-                        addLog(position);
+                        addDeleteLog(position);
                         items.remove(position);
                         mAdapter.removeItem(position);
                     }
@@ -260,7 +260,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         alertDialog.show();
     }
 
-    private void addLog(int position) {
+    private void addDeleteLog(int position) {
         String userName = getString(R.string.user_name_and_last_name,
                 MainActivity.getCurrentUser().getName(), MainActivity.getCurrentUser().getLastName());
         String time = new SimpleDateFormat("dd.MM.yyyy HH:mm").format(Calendar.getInstance().getTime());
@@ -551,6 +551,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Предложить", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                addOfferLog(dataModel, etOffer.getText().toString());
                 dataModel.setOffers(etOffer.getText().toString());
                 itemsRef.child(dataModel.getId()).setValue(dataModel);
             }
@@ -565,6 +566,23 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         });
         alertDialog.setView(view);
         alertDialog.show();
+    }
+
+    private void addOfferLog(DataModel dataModel, String offers) {
+        DataModel originDataModel = null;
+        try {
+            originDataModel = dataModel.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+        dataModel.setOffers(offers);
+
+        String changes = DataModelChangeFinder.getChanges(this, originDataModel, dataModel);
+        String userName = getString(R.string.user_name_and_last_name,
+                MainActivity.getCurrentUser().getName(), MainActivity.getCurrentUser().getLastName());
+        String time = new SimpleDateFormat("dd.MM.yyyy HH:mm").format(Calendar.getInstance().getTime());
+        logsRef.push().setValue(getString(R.string.changedBy, userName, changes, dataModel.getPlateNumber(), time));
     }
 
     public void onClick(View v) {
