@@ -114,21 +114,22 @@ public class AddOrChangeActivityModer0 extends AppCompatActivity {
                 }
                 isAddedOrChanged = true;
                 forChanges = false;
+                dataModel = new DataModel();
                 finish();
                 break;
         }
     }
 
     private void addLog(String changes) {
-        String userName = MainActivity.getmFirebaseUser().getDisplayName();
+        String userName = getString(R.string.user_name_and_last_name,
+                MainActivity.getCurrentUser().getName(), MainActivity.getCurrentUser().getLastName());
         String time = new SimpleDateFormat("dd.MM.yyyy hh:mm").format(Calendar.getInstance().getTime());
         if (forChanges) {
             if (!changes.isEmpty()) {
                 logsRef.push()
                         .setValue(getString(R.string.changedBy, userName, changes, plateNumber.getText().toString(), time));
             }
-        }
-        else {
+        } else {
             logsRef.push().setValue(getString(R.string.addedBy, userName, plateNumber.getText().toString(), time));
         }
     }

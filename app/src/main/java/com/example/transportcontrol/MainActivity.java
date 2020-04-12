@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private DatabaseReference logsRef;
     private ArrayList<UserModel> users = new ArrayList<>();
     private ArrayList<String> logs = new ArrayList<>();
-    UserModel myModel;
+    private static UserModel currentUser;
     private OnActivityTouchListener touchListener;
     private RecyclerView mRecyclerView;
     private RVAdapter mAdapter;
@@ -213,16 +213,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         })).setSwipeOptionViews(R.id.edit, R.id.delete).setSwipeable(R.id.rowFG, R.id.rowBG, (new RecyclerTouchListener.OnSwipeOptionsClickListener() {
             public void onSwipeOptionClicked(int viewID, int position) {
                 if (viewID == R.id.edit) {
-                    if (myModel.getType().equals("moder0")) {
+                    if (currentUser.getType().equals("moder0")) {
                         AddOrChangeActivityModer0.setForChanges(true);
                         AddOrChangeActivityModer0.setDataModel(items.get(position));
                         startActivity(new Intent(MainActivity.this, AddOrChangeActivityModer0.class));
                     }
-                    else if (myModel.getType().equals("user")) {
+                    else if (currentUser.getType().equals("user")) {
                         offer(items.get(position));
                     }
                     else {
-                        AddOrChangeActivityModer123.setMotorcade(myModel.getType()
+                        AddOrChangeActivityModer123.setMotorcade(currentUser.getType()
                                 .replace("moder", ""));
                         AddOrChangeActivityModer123.setForChanges(true);
                         AddOrChangeActivityModer123.setDataModel(items.get(position));
@@ -295,17 +295,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 UserModel userModel = dataSnapshot.getValue(UserModel.class);
                 if (mFirebaseUser != null) {
                     if (userModel.getuId().equals(mFirebaseUser.getUid())) {
-                        myModel = userModel;
+                        currentUser = userModel;
                         progressBar.setVisibility(View.GONE);
                         //user and undefined user can't add items
-                        if (!myModel.getType().equals("user") && !myModel.getType().equals("undefined")) {
+                        if (!currentUser.getType().equals("user") && !currentUser.getType().equals("undefined")) {
                             fabAddItem.show();
                         }
-                        if (myModel.getType().equals("undefined")) {
+                        if (currentUser.getType().equals("undefined")) {
                             mRecyclerView.setVisibility(View.GONE);
                             tvUnconfirmedAccount.setVisibility(View.VISIBLE);
                         }
-                        System.out.println(myModel.getType());
+                        System.out.println(currentUser.getType());
                     }
                 }
                 users.add(userModel);
@@ -339,19 +339,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 DataModel dataModel = dataSnapshot.getValue(DataModel.class);
                 dataModel.setId(dataSnapshot.getKey());
 
-                if (myModel != null) {
+                if (currentUser != null) {
                     //moder0 and user can see all motorcades
-                    if (myModel.getType().equals("moder0") || myModel.getType().equals("user")) {
+                    if (currentUser.getType().equals("moder0") || currentUser.getType().equals("user")) {
                         items.add(dataModel);
                     }
                     //others can only see their respective motorcades
-                    if (myModel.getType().equals("moder1") && dataModel.getMotorcade().equals("1")) {
+                    if (currentUser.getType().equals("moder1") && dataModel.getMotorcade().equals("1")) {
                         items.add(dataModel);
                     }
-                    if (myModel.getType().equals("moder2") && dataModel.getMotorcade().equals("2")) {
+                    if (currentUser.getType().equals("moder2") && dataModel.getMotorcade().equals("2")) {
                         items.add(dataModel);
                     }
-                    if (myModel.getType().equals("moder3") && dataModel.getMotorcade().equals("3")) {
+                    if (currentUser.getType().equals("moder3") && dataModel.getMotorcade().equals("3")) {
                         items.add(dataModel);
                     }
                     setRecyclerViewAdapter(items);
@@ -560,11 +560,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fab:
-                if (myModel.getType().equals("moder0")) {
+                if (currentUser.getType().equals("moder0")) {
                     startActivity(new Intent(this, AddOrChangeActivityModer0.class));
                 }
                 else {
-                    AddOrChangeActivityModer123.setMotorcade(myModel.getType()
+                    AddOrChangeActivityModer123.setMotorcade(currentUser.getType()
                             .replace("moder", ""));
                     startActivity(new Intent(this, AddOrChangeActivityModer123.class));
                 }
@@ -575,7 +575,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         }
     }
 
-    public static FirebaseUser getmFirebaseUser() {
-        return mFirebaseUser;
+    public static UserModel getCurrentUser() {
+        return currentUser;
     }
 }
