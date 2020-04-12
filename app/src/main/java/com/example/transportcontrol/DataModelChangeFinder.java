@@ -49,25 +49,25 @@ public class DataModelChangeFinder {
         if (originDataModel.getWheelNumbers() == null && changedDataModel.getWheelNumbers() != null) {
             changes.add(context.getString(R.string.wheelNumbers));
         }
-        else if (!originDataModel.getWheelNumbers().equals(changedDataModel.getWheelNumbers())) {
+        else if (originDataModel.getWheelNumbers() != null && !originDataModel.getWheelNumbers().equals(changedDataModel.getWheelNumbers())) {
             changes.add(context.getString(R.string.wheelNumbers));
         }
         if (originDataModel.getComments() == null && changedDataModel.getComments() != null) {
             changes.add(context.getString(R.string.comments));
         }
-        else if (!originDataModel.getComments().equals(changedDataModel.getComments())) {
+        else if (originDataModel.getComments() != null && !originDataModel.getComments().equals(changedDataModel.getComments())) {
             changes.add(context.getString(R.string.comments));
         }
         if (originDataModel.getEliminationDate() == null && changedDataModel.getEliminationDate() != null) {
             changes.add(context.getString(R.string.eliminationDate));
         }
-        else if (!originDataModel.getEliminationDate().equals(changedDataModel.getEliminationDate())) {
+        else if (originDataModel.getEliminationDate() != null && !originDataModel.getEliminationDate().equals(changedDataModel.getEliminationDate())) {
             changes.add(context.getString(R.string.eliminationDate));
         }
         if (originDataModel.getCoolantDensity() == null && changedDataModel.getCoolantDensity() != null) {
             changes.add(context.getString(R.string.coolantDensity));
         }
-        else if (!originDataModel.getCoolantDensity().equals(changedDataModel.getCoolantDensity())) {
+        else if (originDataModel.getCoolantDensity() != null && !originDataModel.getCoolantDensity().equals(changedDataModel.getCoolantDensity())) {
             changes.add(context.getString(R.string.coolantDensity));
         }
         if (originDataModel.getElectricalEquipmentState() == null && changedDataModel.getElectricalEquipmentState() != null) {

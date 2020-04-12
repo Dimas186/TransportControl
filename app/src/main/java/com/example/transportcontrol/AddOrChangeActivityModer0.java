@@ -113,21 +113,32 @@ public class AddOrChangeActivityModer0 extends AppCompatActivity {
                 break;
             case R.id.btnAddOrChange:
                 updateDataModel();
+                String changes = DataModelChangeFinder.getChanges(this, dataModel, changedDataModel);
                 if (forChanges) {
-                    String changes = DataModelChangeFinder.getChanges(this, dataModel, changedDataModel);
                     if (!changes.isEmpty()) {
                         myRef.child(dataModel.getId()).setValue(changedDataModel);
-                        String userName = MainActivity.getmFirebaseUser().getDisplayName();
-                        String time = new SimpleDateFormat("dd.MM.yyyy hh:mm").format(Calendar.getInstance().getTime());
-                        logsRef.push()
-                                .setValue(getString(R.string.changedBy, userName, changes, plateNumber.getText().toString(), time));
                     }
                 } else {
                     myRef.push().setValue(changedDataModel);
                 }
+                addLog(changes);
                 isAddedOrChanged = true;
                 finish();
                 break;
+        }
+    }
+
+    private void addLog(String changes) {
+        String userName = MainActivity.getmFirebaseUser().getDisplayName();
+        String time = new SimpleDateFormat("dd.MM.yyyy hh:mm").format(Calendar.getInstance().getTime());
+        if (forChanges) {
+            if (!changes.isEmpty()) {
+                logsRef.push()
+                        .setValue(getString(R.string.changedBy, userName, changes, plateNumber.getText().toString(), time));
+            }
+        }
+        else {
+            logsRef.push().setValue(getString(R.string.addedBy, userName, plateNumber.getText().toString(), time));
         }
     }
 
