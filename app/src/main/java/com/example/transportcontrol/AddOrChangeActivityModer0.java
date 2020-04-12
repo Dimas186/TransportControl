@@ -123,7 +123,7 @@ public class AddOrChangeActivityModer0 extends AppCompatActivity {
     private void addLog(String changes) {
         String userName = getString(R.string.user_name_and_last_name,
                 MainActivity.getCurrentUser().getName(), MainActivity.getCurrentUser().getLastName());
-        String time = new SimpleDateFormat("dd.MM.yyyy hh:mm").format(Calendar.getInstance().getTime());
+        String time = new SimpleDateFormat("dd.MM.yyyy HH:mm").format(Calendar.getInstance().getTime());
         if (forChanges) {
             if (!changes.isEmpty()) {
                 logsRef.push()

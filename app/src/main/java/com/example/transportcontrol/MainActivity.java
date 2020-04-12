@@ -52,7 +52,9 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import in.mayanknagwanshi.imagepicker.ImageSelectActivity;
 
@@ -244,6 +246,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         itemsRef.child(items.get(position).getId()).removeValue();
+                        addLog(position);
                         items.remove(position);
                         mAdapter.removeItem(position);
                     }
@@ -255,6 +258,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 });
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+    }
+
+    private void addLog(int position) {
+        String userName = getString(R.string.user_name_and_last_name,
+                MainActivity.getCurrentUser().getName(), MainActivity.getCurrentUser().getLastName());
+        String time = new SimpleDateFormat("dd.MM.yyyy HH:mm").format(Calendar.getInstance().getTime());
+        logsRef.push().setValue(getString(R.string.deletedBy, userName, items.get(position).getPlateNumber(), time));
     }
 
     private void showInformationDialog(int position) {
