@@ -76,16 +76,28 @@ public class DataModelChangeFinder {
         else if (!originDataModel.getElectricalEquipmentState().equals(changedDataModel.getElectricalEquipmentState())) {
             changes.add(context.getString(R.string.electricalEquipmentState));
         }
-        if (originDataModel.getSufficientPressureInTheFireExtinguisher() != null && !originDataModel.getSufficientPressureInTheFireExtinguisher().equals(changedDataModel.getSufficientPressureInTheFireExtinguisher())) {
+        if (originDataModel.getSufficientPressureInTheFireExtinguisher() == null && changedDataModel.getSufficientPressureInTheFireExtinguisher() != null) {
             changes.add(context.getString(R.string.sufficientPressureInTheFireExtinguisher));
         }
-        if (originDataModel.getElectrolyteDensity() != null && !originDataModel.getElectrolyteDensity().equals(changedDataModel.getElectrolyteDensity())) {
+        else if (!originDataModel.getSufficientPressureInTheFireExtinguisher().equals(changedDataModel.getSufficientPressureInTheFireExtinguisher())) {
+            changes.add(context.getString(R.string.sufficientPressureInTheFireExtinguisher));
+        }
+        if (originDataModel.getElectrolyteDensity() == null && changedDataModel.getElectrolyteDensity() != null) {
             changes.add(context.getString(R.string.electrolyteDensity));
         }
-        if (originDataModel.getOffers() != null && !originDataModel.getOffers().equals(changedDataModel.getOffers())) {
+        else if (!originDataModel.getElectrolyteDensity().equals(changedDataModel.getElectrolyteDensity())) {
+            changes.add(context.getString(R.string.electrolyteDensity));
+        }
+        if (originDataModel.getOffers() == null && changedDataModel.getOffers() != null) {
             changes.add("Предложение");
         }
-        if (originDataModel.getPhoto() != null && !originDataModel.getPhoto().equals(changedDataModel.getPhoto())) {
+        else if (!originDataModel.getOffers().equals(changedDataModel.getOffers())) {
+            changes.add("Предложение");
+        }
+        if (originDataModel.getPhoto() == null && changedDataModel.getPhoto() != null) {
+            changes.add("Фото");
+        }
+        else if (!originDataModel.getPhoto().equals(changedDataModel.getPhoto())) {
             changes.add("Фото");
         }
         return changes.toString();
