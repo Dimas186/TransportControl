@@ -60,26 +60,8 @@ public class AddOrChangeActivityModer0 extends AppCompatActivity {
     private DatabaseReference logsRef;
     private StorageReference mStorageRef;
     ProgressDialog progressDialog;
-
-    public static boolean isAddedOrChanged() {
-        return isAddedOrChanged;
-    }
-
-    public static void setIsAddedOrChanged(boolean isAdded) {
-        AddOrChangeActivityModer0.isAddedOrChanged = isAdded;
-    }
-
     private static boolean isAddedOrChanged = false;
-
-    public static void setForChanges(boolean forChanges) {
-        AddOrChangeActivityModer0.forChanges = forChanges;
-    }
-
     private static boolean forChanges = false;
-
-    public static void setDataModel(DataModel dataModel) {
-        AddOrChangeActivityModer0.dataModel = dataModel;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -289,5 +271,22 @@ public class AddOrChangeActivityModer0 extends AppCompatActivity {
                 progressDialog.cancel();
             }
         });
+    }
+
+    //getters and setters
+    public static boolean isAddedOrChanged() {
+        return isAddedOrChanged;
+    }
+
+    public static void setIsAddedOrChanged(boolean isAdded) {
+        AddOrChangeActivityModer0.isAddedOrChanged = isAdded;
+    }
+
+    public static void setForChanges(boolean forChanges) {
+        AddOrChangeActivityModer0.forChanges = forChanges;
+    }
+
+    public static void setDataModel(DataModel dataModel) {
+        AddOrChangeActivityModer0.dataModel = dataModel;
     }
 }
