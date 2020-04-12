@@ -1,8 +1,10 @@
 package com.example.transportcontrol.model;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 
-public class DataModel {
+public class DataModel implements Cloneable{
 
     private String id;
     private String motorcade, vehicleType, brand, plateNumber, inventoryNumber, garageNumber;
@@ -16,6 +18,12 @@ public class DataModel {
 
     public DataModel() {
 
+    }
+
+    @NonNull
+    @Override
+    public DataModel clone() throws CloneNotSupportedException {
+        return (DataModel) super.clone();
     }
 
     public String getId() {

@@ -86,7 +86,13 @@ public class AddOrChangeActivityModer0 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_or_change_moder0);
 
-        changedDataModel = dataModel;
+        try {
+            changedDataModel = dataModel.clone();
+        } catch (CloneNotSupportedException e) {
+            System.out.println("AAAAAAAAAW");
+            e.printStackTrace();
+        }
+        driversList.addAll(dataModel.getDrivers());
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("items");
         logsRef = database.getReference("logs");
@@ -113,15 +119,16 @@ public class AddOrChangeActivityModer0 extends AppCompatActivity {
                 break;
             case R.id.btnAddOrChange:
                 updateDataModel();
-                String changes = DataModelChangeFinder.getChanges(this, dataModel, changedDataModel);
                 if (forChanges) {
+                    String changes = DataModelChangeFinder.getChanges(this, dataModel, changedDataModel);
                     if (!changes.isEmpty()) {
                         myRef.child(dataModel.getId()).setValue(changedDataModel);
                     }
+                    addLog(changes);
                 } else {
                     myRef.push().setValue(changedDataModel);
+                    addLog("");
                 }
-                addLog(changes);
                 isAddedOrChanged = true;
                 finish();
                 break;
