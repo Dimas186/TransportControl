@@ -46,29 +46,32 @@ public class DataModelChangeFinder {
         if (!originDataModel.getPreviousTechnicalInspection().equals(changedDataModel.getPreviousTechnicalInspection())) {
             changes.add(context.getString(R.string.previousTechnicalInspection));
         }
-        if (!originDataModel.getWheelNumbers().equals(changedDataModel.getWheelNumbers())) {
+        if (originDataModel.getWheelNumbers() != null && !originDataModel.getWheelNumbers().equals(changedDataModel.getWheelNumbers())) {
             changes.add(context.getString(R.string.wheelNumbers));
         }
-        if (!originDataModel.getComments().equals(changedDataModel.getComments())) {
+        if (originDataModel.getComments() != null && !originDataModel.getComments().equals(changedDataModel.getComments())) {
             changes.add(context.getString(R.string.comments));
         }
-        if (!originDataModel.getEliminationDate().equals(changedDataModel.getEliminationDate())) {
+        if (originDataModel.getEliminationDate() != null && !originDataModel.getEliminationDate().equals(changedDataModel.getEliminationDate())) {
             changes.add(context.getString(R.string.eliminationDate));
         }
-        if (!originDataModel.getCoolantDensity().equals(changedDataModel.getCoolantDensity())) {
+        if (originDataModel.getCoolantDensity() != null && !originDataModel.getCoolantDensity().equals(changedDataModel.getCoolantDensity())) {
             changes.add(context.getString(R.string.coolantDensity));
         }
-        if (!originDataModel.getElectricalEquipmentState().equals(changedDataModel.getElectricalEquipmentState())) {
+        if (originDataModel.getElectricalEquipmentState() != null && !originDataModel.getElectricalEquipmentState().equals(changedDataModel.getElectricalEquipmentState())) {
             changes.add(context.getString(R.string.electricalEquipmentState));
         }
-        if (!originDataModel.getSufficientPressureInTheFireExtinguisher().equals(changedDataModel.getSufficientPressureInTheFireExtinguisher())) {
+        if (originDataModel.getSufficientPressureInTheFireExtinguisher() != null && !originDataModel.getSufficientPressureInTheFireExtinguisher().equals(changedDataModel.getSufficientPressureInTheFireExtinguisher())) {
             changes.add(context.getString(R.string.sufficientPressureInTheFireExtinguisher));
         }
-        if (!originDataModel.getElectrolyteDensity().equals(changedDataModel.getElectrolyteDensity())) {
+        if (originDataModel.getElectrolyteDensity() != null && !originDataModel.getElectrolyteDensity().equals(changedDataModel.getElectrolyteDensity())) {
             changes.add(context.getString(R.string.electrolyteDensity));
         }
-        if (!originDataModel.getOffers().equals(changedDataModel.getOffers())) {
-            changes.add(context.getString(R.string.offer));
+        if (originDataModel.getOffers() != null && !originDataModel.getOffers().equals(changedDataModel.getOffers())) {
+            changes.add("Предложение");
+        }
+        if (originDataModel.getPhoto() != null && !originDataModel.getPhoto().equals(changedDataModel.getPhoto())) {
+            changes.add("Фото");
         }
         return changes.toString();
     }
