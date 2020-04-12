@@ -67,7 +67,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private static FirebaseUser mFirebaseUser;
     private DatabaseReference usersRef;
     private DatabaseReference itemsRef;
+    private DatabaseReference logsRef;
     private ArrayList<UserModel> users = new ArrayList<>();
+    private ArrayList<String> logs = new ArrayList<>();
     UserModel myModel;
     private OnActivityTouchListener touchListener;
     private RecyclerView mRecyclerView;
@@ -96,9 +98,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         usersRef = database.getReference("users");
         itemsRef = database.getReference("items");
+        logsRef = database.getReference("logs");
         setUsers();
         initRV();
         setData();
+        setLogs();
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -166,8 +170,26 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Toast.makeText(this, "Item", Toast.LENGTH_SHORT).show();
+        showChangeLogs();
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showChangeLogs() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Логи")
+                .setMessage(arrayListToString(logs))
+                .setCancelable(true)
+                .setPositiveButton("Ок", null);
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private String arrayListToString(ArrayList<String> list) {
+        StringBuilder str = new StringBuilder();
+        for (String s : list) {
+            str.append(s).append("\n\n");
+        }
+        return str.toString();
     }
 
     private void initRV() {
@@ -242,12 +264,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         builder.setTitle(items.get(position).getBrand())
                 .setMessage(DataModelToTextHandler.handle(items.get(position)))
                 .setCancelable(true)
-                .setNegativeButton("Ок",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
+                .setPositiveButton("Ок", null);
         AlertDialog alert = builder.create();
         alert.show();
     }
@@ -341,6 +358,34 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     }
                     setRecyclerViewAdapter(items);
                 }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+    private void setLogs() {
+        logs = new ArrayList();
+
+        Query myQuery = logsRef;
+        myQuery.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                logs.add(dataSnapshot.getValue(String.class));
             }
 
             @Override
