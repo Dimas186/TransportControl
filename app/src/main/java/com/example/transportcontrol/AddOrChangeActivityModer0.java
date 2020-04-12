@@ -109,8 +109,6 @@ public class AddOrChangeActivityModer0 extends AppCompatActivity {
             case R.id.btnAddOrChange:
                 setDataModel();
                 if (forChanges) {
-                    forChanges = false;
-                    dataModel = new DataModel();
                     myRef.child(dataModel.getId()).setValue(dataModel);
                 } else {
                     myRef.push().setValue(dataModel);

@@ -30,4 +30,6 @@
     <string name="delete">Удалить</string>
     <string name="unconfirmed_account">Ваш аккаунт ещё не подтверждён</string>
     <string name="offer">Введите предложение…</string>
+    <string name="addedBy">%s добавил %s %s</string>
+    <string name="changedBy">Введите предложение…</string>
 </resources>

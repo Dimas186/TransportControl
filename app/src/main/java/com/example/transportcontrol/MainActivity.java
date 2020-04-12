@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private static final int RC_SIGN_IN = 9001;
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mFirebaseAuth;
-    private FirebaseUser mFirebaseUser;
+    private static FirebaseUser mFirebaseUser;
     private DatabaseReference usersRef;
     private DatabaseReference itemsRef;
     private ArrayList<UserModel> users = new ArrayList<>();
@@ -530,5 +530,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 showImageImportDialog();
                 break;
         }
+    }
+
+    public static FirebaseUser getmFirebaseUser() {
+        return mFirebaseUser;
     }
 }
