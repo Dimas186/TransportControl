@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.transportcontrol.handler.DataModelToTextHandler;
+import com.example.transportcontrol.handler.OCRHandler;
 import com.example.transportcontrol.model.DataModel;
 import com.example.transportcontrol.model.UserModel;
 import com.google.android.gms.auth.api.Auth;
@@ -43,10 +45,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import in.mayanknagwanshi.imagepicker.ImageSelectActivity;
+
+import static com.example.transportcontrol.handler.PlateNumberHandler.handleText;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, RecyclerTouchListener.RecyclerTouchListenerHelper {
 
@@ -375,6 +382,23 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 Log.e(TAG, "Google Sign-In failed.");
             }
         }
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1213) {
+                String filePath = data.getStringExtra(ImageSelectActivity.RESULT_FILE_PATH);
+                CropImage.activity(Uri.fromFile(new File(filePath)))
+                        .setGuidelines(CropImageView.Guidelines.ON).start(this);
+            }
+        }
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                searchView.setIconified(false);//open searchView
+                searchView.setQuery(handleText(OCRHandler.handle(data, MainActivity.this).toString()), false);
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                CropImage.ActivityResult result = CropImage.getActivityResult(data);
+                Exception error = result.getError();
+                Toast.makeText(this, "" + error, Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
@@ -389,7 +413,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                             Toast.makeText(MainActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(MainActivity.this, "Succes", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
                             boolean userIsRegistered = false;
                             for (UserModel userModel : users) {
                                 if (userModel.getuId().equals(mFirebaseAuth.getUid())) {
@@ -404,6 +428,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                             }
                             mFirebaseUser = mFirebaseAuth.getCurrentUser();
                             setUsers();
+                            initRV();
+                            setData();
                         }
                     }
                 });
@@ -483,6 +509,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 }
                 break;
             case R.id.ivScan:
+                showImageImportDialog();
                 break;
         }
     }
