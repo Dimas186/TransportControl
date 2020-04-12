@@ -73,18 +73,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         progressBar = findViewById(R.id.progressBar);
         tvUnconfirmedAccount = findViewById(R.id.tvUnconfirmedAccount);
         searchView = findViewById(R.id.searchView);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                System.out.println(s);
-                return false;
-            }
-        });
+        setOnQueryTextListener();
         fabAddItem = findViewById(R.id.fab);
         fabAddItem.hide();//to avoid a departure, you need to wait until the current user's model is found
 
@@ -109,6 +98,35 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         login();
+    }
+
+    private void setOnQueryTextListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                setRecyclerViewAdapter(getFilteredList(s.toUpperCase()));
+                return false;
+            }
+        });
+    }
+
+    private ArrayList<DataModel> getFilteredList(String query) {
+        ArrayList<DataModel> filteredList = new ArrayList<>();
+        for (DataModel dataModel : items) {
+            if (query.isEmpty()) {
+                filteredList.add(dataModel);
+            }
+            else if (dataModel.getPlateNumber().contains(query)
+                    || dataModel.getInventoryNumber().contains(query)) {
+                filteredList.add(dataModel);
+            }
+        }
+        return filteredList;
     }
 
     private void login() {
@@ -212,8 +230,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         this.touchListener = listener;
     }
 
-    private void setRecyclerViewAdapter() {
-        mAdapter = new RVAdapter(this, items);
+    private void setRecyclerViewAdapter(ArrayList<DataModel> list) {
+        mAdapter = new RVAdapter(this, list);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -293,7 +311,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     if (myModel.getType().equals("moder3") && dataModel.getMotorcade().equals("3")) {
                         items.add(dataModel);
                     }
-                    setRecyclerViewAdapter();
+                    setRecyclerViewAdapter(items);
                 }
             }
 
