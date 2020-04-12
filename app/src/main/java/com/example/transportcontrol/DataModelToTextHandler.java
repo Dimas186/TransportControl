@@ -15,6 +15,16 @@ public class DataModelToTextHandler {
         result.append("Тех. Осмотр: ").append(dataModel.getTechnicalInspection()).append("\n\n");
         result.append("Страховка: ").append(dataModel.getInsurance()).append("\n\n");
         result.append("Аптечка: ").append(dataModel.getFirstAidKit()).append("\n\n");
+        result.append("Огнетушитель: ").append(dataModel.getExtinguisher()).append("\n\n");
+        result.append("Дата проведения Предыдущего ТО: ").append(dataModel.getPreviousTechnicalInspection()).append("\n\n");
+        result.append("Номера колес: ").append(dataModel.getWheelNumbers()).append("\n\n");
+        result.append("Замечания: ").append(dataModel.getComments()).append("\n\n");
+        result.append("Дата устранения: ").append(dataModel.getEliminationDate()).append("\n\n");
+        result.append("Плотность ОЖ: ").append(dataModel.getCoolantDensity()).append("\n\n");
+        result.append("Состояние электрооборудования: ").append(dataModel.getElectricalEquipmentState()).append("\n\n");
+        result.append("Достаточное давление в огнетушителе: ").append(dataModel.getSufficientPressureInTheFireExtinguisher()).append("\n\n");
+        result.append("Плотность электролита (Состояние АКБ): ").append(dataModel.getElectrolyteDensity()).append("\n\n");
+        result.append("Предложение: ").append(dataModel.getOffers()).append("\n\n");
         return result.toString();
     }
 }
