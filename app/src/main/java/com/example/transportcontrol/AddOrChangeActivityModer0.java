@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.transportcontrol.handler.OCRHandler;
 import com.example.transportcontrol.model.DataModel;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,6 +42,8 @@ import java.util.Date;
 import java.util.Locale;
 
 import in.mayanknagwanshi.imagepicker.ImageSelectActivity;
+
+import static com.example.transportcontrol.handler.PlateNumberHandler.handleText;
 
 public class AddOrChangeActivityModer0 extends AppCompatActivity {
 
@@ -209,31 +212,10 @@ public class AddOrChangeActivityModer0 extends AppCompatActivity {
             }
         }
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
-                Uri resultUri = result.getUri();
-                Bitmap bitmap = null;
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), resultUri);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                TextRecognizer recognizer = new TextRecognizer.Builder(getApplicationContext()).build();
-                if (!recognizer.isOperational()) {
-                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-                } else {
-                    Frame frame = new Frame.Builder().setBitmap(bitmap).build();
-                    SparseArray<TextBlock> items = recognizer.detect(frame);
-                    StringBuilder sb = new StringBuilder();
-                    for (int i = 0; i < items.size(); i++) {
-                        TextBlock myitem = items.valueAt(i);
-                        sb.append(myitem.getValue());
-                        sb.append("\n");
-                    }
-                    plateNumber.setText(handleText(sb.toString()));
-                }
-
+                plateNumber.setText(handleText(OCRHandler.handle(data, AddOrChangeActivityModer0.this).toString()));
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                CropImage.ActivityResult result = CropImage.getActivityResult(data);
                 Exception error = result.getError();
                 Toast.makeText(this, "" + error, Toast.LENGTH_SHORT).show();
             }
@@ -280,31 +262,5 @@ public class AddOrChangeActivityModer0 extends AppCompatActivity {
                 progressDialog.cancel();
             }
         });
-    }
-
-    private String handleText(String text) {
-        text = text.toUpperCase();
-        //the 0, 4 and 5 position must have letters, but it can't be 0
-        if (text.charAt(0) == '0') {
-            text = text.substring(0, 0) + 'O' + text.substring(1);
-        }
-        if (text.charAt(4) == '0') {
-            text = text.substring(0, 4) + 'O' + text.substring(5);
-        }
-        if (text.charAt(5) == '0') {
-            text = text.substring(0, 5) + 'O' + text.substring(6);
-        }
-        //positions 1, 2, and 3 must have numbers
-        if (text.charAt(1) == 'O') {
-            text = text.substring(0, 1) + '0' + text.substring(2);
-        }
-        if (text.charAt(2) == 'O') {
-            text = text.substring(0, 2) + '0' + text.substring(3);
-        }
-        if (text.charAt(3) == 'O') {
-            text = text.substring(0, 3) + '0' + text.substring(4);
-        }
-        return text.replace("RUS", "").replace(" ", "")
-                .replace("\n", "");
     }
 }

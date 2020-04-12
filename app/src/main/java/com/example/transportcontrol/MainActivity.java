@@ -20,6 +20,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.transportcontrol.handler.DataModelToTextHandler;
 import com.example.transportcontrol.model.DataModel;
 import com.example.transportcontrol.model.UserModel;
 import com.google.android.gms.auth.api.Auth;
@@ -44,6 +45,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
+
+import in.mayanknagwanshi.imagepicker.ImageSelectActivity;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, RecyclerTouchListener.RecyclerTouchListenerHelper {
 
@@ -350,6 +353,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
         Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
+    }
+
+    private void showImageImportDialog() {
+        Intent intent = new Intent(this, ImageSelectActivity.class);
+        intent.putExtra(ImageSelectActivity.FLAG_COMPRESS, false);//default is true
+        intent.putExtra(ImageSelectActivity.FLAG_CAMERA, true);//default is true
+        intent.putExtra(ImageSelectActivity.FLAG_GALLERY, true);//default is true
+        startActivityForResult(intent, 1213);
     }
 
     @Override
