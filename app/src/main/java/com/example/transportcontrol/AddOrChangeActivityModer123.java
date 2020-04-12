@@ -60,31 +60,8 @@ public class AddOrChangeActivityModer123 extends AppCompatActivity {
     private DatabaseReference logsRef;
     private StorageReference mStorageRef;
     ProgressDialog progressDialog;
-
-    public static boolean isAddedOrChanged() {
-        return isAddedOrChanged;
-    }
-
-    public static void setIsAddedOrChanged(boolean isAdded) {
-        AddOrChangeActivityModer123.isAddedOrChanged = isAdded;
-    }
-
     private static boolean isAddedOrChanged = false;
-
-    public static void setForChanges(boolean forChanges) {
-        AddOrChangeActivityModer123.forChanges = forChanges;
-    }
-
     private static boolean forChanges = false;
-
-    public static void setDataModel(DataModel dataModel) {
-        AddOrChangeActivityModer123.dataModel = dataModel;
-    }
-
-    public static void setMotorcade(String motorcade) {
-        AddOrChangeActivityModer123.motorcade = motorcade;
-    }
-
     private static String motorcade;
 
     @Override
@@ -288,5 +265,26 @@ public class AddOrChangeActivityModer123 extends AppCompatActivity {
                 progressDialog.cancel();
             }
         });
+    }
+
+    //getters and setters
+    public static boolean isAddedOrChanged() {
+        return isAddedOrChanged;
+    }
+
+    public static void setIsAddedOrChanged(boolean isAdded) {
+        AddOrChangeActivityModer123.isAddedOrChanged = isAdded;
+    }
+
+    public static void setForChanges(boolean forChanges) {
+        AddOrChangeActivityModer123.forChanges = forChanges;
+    }
+
+    public static void setDataModel(DataModel dataModel) {
+        AddOrChangeActivityModer123.dataModel = dataModel;
+    }
+
+    public static void setMotorcade(String motorcade) {
+        AddOrChangeActivityModer123.motorcade = motorcade;
     }
 }
