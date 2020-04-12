@@ -2,6 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\Stdio\\Desktop\\TransportControl\\key.jks')
+            storePassword 'yourpassword'
+            keyAlias = 'key0'
+            keyPassword 'yourpassword'
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
