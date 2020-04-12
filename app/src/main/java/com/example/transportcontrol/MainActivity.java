@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     ProgressBar progressBar;
     FloatingActionButton fabAddItem;
     TextView tvUnconfirmedAccount;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         setContentView(R.layout.activity_main);
         progressBar = findViewById(R.id.progressBar);
         tvUnconfirmedAccount = findViewById(R.id.tvUnconfirmedAccount);
+        searchView = findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                System.out.println(s);
+                return false;
+            }
+        });
         fabAddItem = findViewById(R.id.fab);
         fabAddItem.hide();//to avoid a departure, you need to wait until the current user's model is found
 
