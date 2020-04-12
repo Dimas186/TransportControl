@@ -17,11 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public  class RVAdapter extends RecyclerView.Adapter<RVAdapter.MainViewHolder> {
-    LayoutInflater inflater;
-    List<DataModel> modelList;
-    Context mContext;
+    private LayoutInflater inflater;
+    private List<DataModel> modelList;
+    private Context mContext;
 
-    public RVAdapter(Context context, List<DataModel> list) {
+    RVAdapter(Context context, List<DataModel> list) {
         mContext = context;
         inflater = LayoutInflater.from(context);
         modelList = new ArrayList<>(list);
@@ -38,7 +38,7 @@ public  class RVAdapter extends RecyclerView.Adapter<RVAdapter.MainViewHolder> {
         holder.bindData(modelList.get(position));
     }
 
-    public void removeItem(int position) {
+    void removeItem(int position) {
         modelList.remove(position);
         // notify the item removed by position
         // to perform recycler view delete animations
@@ -56,13 +56,13 @@ public  class RVAdapter extends RecyclerView.Adapter<RVAdapter.MainViewHolder> {
         TextView mainText;
         ImageView ivPhoto;
 
-        public MainViewHolder(View itemView) {
+        MainViewHolder(View itemView) {
             super(itemView);
             mainText = itemView.findViewById(R.id.name);
             ivPhoto = itemView.findViewById(R.id.ivPhoto);
         }
 
-        public void bindData(DataModel dataModel) {
+        void bindData(DataModel dataModel) {
             mainText.setText(dataModel.getBrand());
             Glide.with(mContext) //Takes the context
                     .asBitmap()  //Tells glide that it is a bitmap

@@ -284,9 +284,6 @@ public class AddOrChangeActivityModer123 extends AppCompatActivity {
                                     .centerCrop()
                                     .placeholder(R.drawable.progress_animation))
                             .into(ivPhoto);
-                } else {
-                    // Handle failures
-                    // ...
                 }
                 progressDialog.cancel();
             }
