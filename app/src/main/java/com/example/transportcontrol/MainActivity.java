@@ -3,6 +3,7 @@ package com.example.transportcontrol;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -86,6 +89,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         setOnQueryTextListener();
         fabAddItem = findViewById(R.id.fab);
         fabAddItem.hide();//to avoid a departure, you need to wait until the current user's model is found
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         prefManager = new PrefManager(this);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -150,6 +155,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 regUser();
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Toast.makeText(this, "Item", Toast.LENGTH_SHORT).show();
+        return super.onOptionsItemSelected(item);
     }
 
     private void initRV() {
