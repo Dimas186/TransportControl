@@ -11,7 +11,7 @@ public class DataModelToTextHandler {
         result.append("Гос. Номер: ").append(dataModel.getPlateNumber()).append("\n\n");
         result.append("Инвентарный номер: ").append(dataModel.getInventoryNumber()).append("\n\n");
         result.append("Гаражный номер: ").append(dataModel.getGarageNumber()).append("\n\n");
-        result.append("Закрепленные водители: ").append(dataModel.getMotorcade()).append("\n\n");
+        result.append("Закрепленные водители: ").append(dataModel.getDrivers()).append("\n\n");
         result.append("Тех. Осмотр: ").append(dataModel.getTechnicalInspection()).append("\n\n");
         result.append("Страховка: ").append(dataModel.getInsurance()).append("\n\n");
         result.append("Аптечка: ").append(dataModel.getFirstAidKit()).append("\n\n");
