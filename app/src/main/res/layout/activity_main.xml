@@ -7,16 +7,33 @@
     android:animateLayoutChanges="true"
     tools:context=".MainActivity">
 
-    <SearchView
-        android:id="@+id/searchView"
+    <LinearLayout
+        android:id="@+id/searchLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" >
+        </SearchView>
+        <ImageView
+            android:id="@+id/ivScan"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:layout_marginEnd="15dp"
+            app:srcCompat="@drawable/ic_scan" />
+    </LinearLayout>
 
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/searchView"
+        android:layout_below="@+id/searchLayout"
         android:background="?android:attr/listDivider" />
 
     <TextView

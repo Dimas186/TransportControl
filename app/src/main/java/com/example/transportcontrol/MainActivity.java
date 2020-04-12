@@ -460,13 +460,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     public void onClick(View v) {
-        if (myModel.getType().equals("moder0")) {
-            startActivity(new Intent(this, AddOrChangeActivityModer0.class));
-        }
-        else {
-            AddOrChangeActivityModer123.setMotorcade(myModel.getType()
-                    .replace("moder", ""));
-            startActivity(new Intent(this, AddOrChangeActivityModer123.class));
+        switch (v.getId()) {
+            case R.id.fab:
+                if (myModel.getType().equals("moder0")) {
+                    startActivity(new Intent(this, AddOrChangeActivityModer0.class));
+                }
+                else {
+                    AddOrChangeActivityModer123.setMotorcade(myModel.getType()
+                            .replace("moder", ""));
+                    startActivity(new Intent(this, AddOrChangeActivityModer123.class));
+                }
+                break;
+            case R.id.ivScan:
+                break;
         }
     }
 }
