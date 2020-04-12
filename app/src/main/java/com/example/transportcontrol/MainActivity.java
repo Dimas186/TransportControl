@@ -153,9 +153,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
             startActivityForResult(signInIntent, RC_SIGN_IN);
         } else {
-            if (prefManager.isUserRegistered()) {
-                Toast.makeText(MainActivity.this, mFirebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
-            } else {
+            if (!prefManager.isUserRegistered()) {
                 regUser();
             }
         }
