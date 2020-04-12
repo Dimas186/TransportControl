@@ -66,7 +66,7 @@ public  class RVAdapter extends RecyclerView.Adapter<RVAdapter.MainViewHolder> {
             mainText.setText(dataModel.getBrand());
             Glide.with(mContext) //Takes the context
                     .asBitmap()  //Tells glide that it is a bitmap
-                    .load(dataModel.getPhoto())
+                    .load((dataModel.getPhoto() != null) ? dataModel.getPhoto() : R.drawable.no_image)
                     .apply(new RequestOptions()
                             .override(400, 250)
                             .centerCrop()
