@@ -73,7 +73,7 @@ public class AddOrChangeActivityModer0 extends AppCompatActivity {
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
-        if (forChanges) {
+        if (dataModel.getDrivers() != null) {
             driversList.addAll(dataModel.getDrivers());
         }
         database = FirebaseDatabase.getInstance();

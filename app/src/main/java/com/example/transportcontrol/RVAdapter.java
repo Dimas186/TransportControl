@@ -46,6 +46,10 @@ public  class RVAdapter extends RecyclerView.Adapter<RVAdapter.MainViewHolder> {
         notifyItemRemoved(position);
     }
 
+    public List<DataModel> getModelList() {
+        return modelList;
+    }
+
     @Override
     public int getItemCount() {
         return modelList.size();

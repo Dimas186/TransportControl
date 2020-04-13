@@ -217,17 +217,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 if (viewID == R.id.edit) {
                     if (currentUser.getType().equals("moder0")) {
                         AddOrChangeActivityModer0.setForChanges(true);
-                        AddOrChangeActivityModer0.setDataModel(items.get(position));
+                        AddOrChangeActivityModer0.setDataModel(mAdapter.getModelList().get(position));
                         startActivity(new Intent(MainActivity.this, AddOrChangeActivityModer0.class));
                     }
                     else if (currentUser.getType().equals("user")) {
-                        offer(items.get(position));
+                        offer(mAdapter.getModelList().get(position));
                     }
                     else {
                         AddOrChangeActivityModer123.setMotorcade(currentUser.getType()
                                 .replace("moder", ""));
                         AddOrChangeActivityModer123.setForChanges(true);
-                        AddOrChangeActivityModer123.setDataModel(items.get(position));
+                        AddOrChangeActivityModer123.setDataModel(mAdapter.getModelList().get(position));
                         startActivity(new Intent(MainActivity.this, AddOrChangeActivityModer123.class));
                     }
                 } else if (viewID == R.id.delete) {
@@ -245,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .setMessage("Удалить?")
                 .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        itemsRef.child(items.get(position).getId()).removeValue();
+                        itemsRef.child(mAdapter.getModelList().get(position).getId()).removeValue();
                         addDeleteLog(position);
                         items.remove(position);
                         mAdapter.removeItem(position);
@@ -264,13 +264,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         String userName = getString(R.string.user_name_and_last_name,
                 MainActivity.getCurrentUser().getName(), MainActivity.getCurrentUser().getLastName());
         String time = new SimpleDateFormat("dd.MM.yyyy HH:mm").format(Calendar.getInstance().getTime());
-        logsRef.push().setValue(getString(R.string.deletedBy, userName, items.get(position).getPlateNumber(), time));
+        logsRef.push().setValue(getString(R.string.deletedBy, userName, mAdapter.getModelList().get(position).getPlateNumber(), time));
     }
 
     private void showInformationDialog(int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(items.get(position).getBrand())
-                .setMessage(DataModelToTextHandler.handle(items.get(position)))
+        builder.setTitle(mAdapter.getModelList().get(position).getBrand())
+                .setMessage(DataModelToTextHandler.handle(mAdapter.getModelList().get(position)))
                 .setCancelable(true)
                 .setPositiveButton("Ок", null);
         AlertDialog alert = builder.create();
