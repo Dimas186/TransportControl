@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Контроль транспорта</string>
     <string name="motorcade">Автоколонна</string>
-    <string name="vehicleType">Тип ТС</string>
+    <string name="model">Модель</string>
     <string name="brand">Марка</string>
     <string name="plateNumber">Гос. Номер</string>
     <string name="inventoryNumber">Инвентарный №</string>

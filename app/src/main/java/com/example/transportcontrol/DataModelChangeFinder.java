@@ -14,7 +14,7 @@ public class DataModelChangeFinder {
             changes.add(context.getString(R.string.motorcade));
         }
         if (!originDataModel.getVehicleType().equals(changedDataModel.getVehicleType())) {
-            changes.add(context.getString(R.string.vehicleType));
+            changes.add(context.getString(R.string.model));
         }
         if (!originDataModel.getBrand().equals(changedDataModel.getBrand())) {
             changes.add(context.getString(R.string.brand));

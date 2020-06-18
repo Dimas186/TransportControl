@@ -57,17 +57,23 @@ public  class RVAdapter extends RecyclerView.Adapter<RVAdapter.MainViewHolder> {
 
     class MainViewHolder extends RecyclerView.ViewHolder {
 
-        TextView mainText;
+        TextView mainText, tvPlateNumber, tvInventoryNumber, tvGarageNumber;
         ImageView ivPhoto;
 
         MainViewHolder(View itemView) {
             super(itemView);
             mainText = itemView.findViewById(R.id.name);
+            tvPlateNumber = itemView.findViewById(R.id.tvPlateNumber);
+            tvInventoryNumber = itemView.findViewById(R.id.tvInventoryNumber);
+            tvGarageNumber = itemView.findViewById(R.id.tvGarageNumber);
             ivPhoto = itemView.findViewById(R.id.ivPhoto);
         }
 
         void bindData(DataModel dataModel) {
-            mainText.setText(dataModel.getBrand());
+            mainText.setText("Модель: " + dataModel.getBrand() + " " + dataModel.getVehicleType());
+            tvPlateNumber.setText("Гос. №: " + dataModel.getPlateNumber());
+            tvInventoryNumber.setText("Инвентарный №: " + dataModel.getInventoryNumber());
+            tvGarageNumber.setText("Гаражный №: " + dataModel.getGarageNumber());
             Glide.with(mContext) //Takes the context
                     .asBitmap()  //Tells glide that it is a bitmap
                     .load((dataModel.getPhoto() != null) ? dataModel.getPhoto() : R.drawable.no_image)

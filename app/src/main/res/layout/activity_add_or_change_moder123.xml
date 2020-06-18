@@ -16,15 +16,6 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/vehicleType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName|textCapSentences"
-                android:layout_gravity="center_horizontal"
-                android:hint="@string/vehicleType"
-                android:layout_marginBottom="10dp"/>
-            <EditText
                 android:id="@+id/brand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -32,6 +23,15 @@
                 android:inputType="textPersonName|textCapSentences"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/brand"
+                android:layout_marginBottom="10dp"/>
+            <EditText
+                android:id="@+id/vehicleType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName|textCapSentences"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/model"
                 android:layout_marginBottom="10dp"/>
             <RelativeLayout
                 android:layout_width="match_parent"

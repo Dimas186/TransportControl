@@ -5,8 +5,8 @@ import com.example.transportcontrol.model.DataModel;
 public class DataModelToTextHandler {
     public static String handle(DataModel dataModel) {
         return "Автоколонна: " + dataModel.getMotorcade() + "\n\n" +
-                "Тип ТС: " + dataModel.getVehicleType() + "\n\n" +
                 "Марка: " + dataModel.getBrand() + "\n\n" +
+                "Модель: " + dataModel.getVehicleType() + "\n\n" +
                 "Гос. Номер: " + dataModel.getPlateNumber() + "\n\n" +
                 "Инвентарный номер: " + dataModel.getInventoryNumber() + "\n\n" +
                 "Гаражный номер: " + dataModel.getGarageNumber() + "\n\n" +
